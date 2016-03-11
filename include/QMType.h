@@ -1,33 +1,21 @@
-#ifndef QMTYPE_H
-#define QMTYPE_H
-#include <string>
+#ifndef QM_TYPE_H
+#define QM_TYPE_H
 
-namespace QuickMath { 
+#include <ostream>
+#include <memory>
+
+namespace QuickMath {
 class QMType {
-public:
-    virtual QMType* clone() const = 0;
+    public:
     virtual std::string toString() const = 0;
-
-    virtual bool isVar() const {
-        return false;
-    }
-
-    virtual bool isExpr() const {
-        return false;
-    }
-
-    virtual bool isConstant() const {
-        return false;
-    }
-
-
-protected:
+    virtual bool isBoolType() const;
+    virtual bool isFuncType() const;
+    virtual bool isMixedType() const;
+    virtual std::unique_ptr<QMType> clone() const = 0;
+    protected:
     friend std::ostream& operator<< (std::ostream& outStream, const QMType& val);
-
 };
-
 
 }
 
-#endif 
-
+#endif

@@ -1,9 +1,9 @@
-#ifndef QM_EXPR_H
-#define QM_EXPR_H
-#include "QMType.h"
-#include "QMDefs.h"
+#ifndef QF_EXPR_H
+#define QF_EXPR_H
+#include "./QFType.h"
+#include "../QMDefs.h"
 namespace QuickMath {
-class QMExpr : public QMType {
+class QFExpr : public QFType {
     public:
         bool isExpr() const;
         virtual QMOpType opType() const;   

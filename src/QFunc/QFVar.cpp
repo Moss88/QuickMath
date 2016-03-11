@@ -1,16 +1,16 @@
-#include "QMVar.h"
+#include "QFunc/QFVar.h"
 
 namespace QuickMath {
 
-QMVar::QMVar(const std::string& name, int idx) :
+QFVar::QFVar(const std::string& name, int idx) :
                                         name(name),
                                         idx(idx) {}
-QMVar::QMVar(const QMVar& var) : name(var.name),
+QFVar::QFVar(const QFVar& var) : name(var.name),
                                  idx(var.idx) {}
-QMVar::QMVar(QMVar&& var) : name(std::move(var.name)),
+QFVar::QFVar(QFVar&& var) : name(std::move(var.name)),
                             idx(var.idx) {}
 
-QMVar& QMVar::operator=(const QMVar& other) {
+QFVar& QFVar::operator=(const QFVar& other) {
     if(this != &other)
     {
         this->name = other.name;
@@ -19,40 +19,40 @@ QMVar& QMVar::operator=(const QMVar& other) {
     return *this;
 }
 
-QMVar& QMVar::operator=(QMVar&& other) {
+QFVar& QFVar::operator=(QFVar&& other) {
     this->name = std::move(other.name);
     this->idx = other.idx;
     return *this;
 }
 
-QMType* QMVar::clone() const {
-    return new QMVar(*this);
+std::unique_ptr<QMType> QFVar::clone() const {
+    return std::unique_ptr<QFVar>(new QFVar(*this));
 }
 
-std::string QMVar::toString() const {
+std::string QFVar::toString() const {
     return name + "_" + std::to_string(idx);
 }
 
-bool QMVar::isVar() const {
+bool QFVar::isVar() const {
     return true;
 }
         
-const std::string& QMVar::getName() const {
+const std::string& QFVar::getName() const {
     return name;
 }
 
-int QMVar::getIndex() const {
+int QFVar::getIndex() const {
     return idx;
 }
 
-bool QMVar::operator==(const QMVar& rhs) const {
+bool QFVar::operator==(const QFVar& rhs) const {
     return (name == rhs.name) && (idx == rhs.idx);
 }
 
-bool QMVar::operator<(const QMVar& rhs) const {
+bool QFVar::operator<(const QFVar& rhs) const {
     return (name < rhs.name) || 
            ((name == rhs.name) && (idx < rhs.idx));
 }
 
-QMVar::~QMVar(){}
+QFVar::~QFVar(){}
 }
