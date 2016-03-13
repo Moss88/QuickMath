@@ -1,16 +1,17 @@
 #include "QBool/QBNot.h"
+#include "QMDefs.h"
 #include <iostream>
 namespace QuickMath {
 using namespace std;
 QBNot::QBNot(QBType &a) {
-    this->operands.emplace_back(std::unique_ptr<QBType>(a.clone()));
+    this->operands.emplace_back(static_uptr_cast<QBType>(a.clone()));
 }
 
 QBNot::QBNot(unique_ptr<QBType> a) {
     this->operands.emplace_back(std::move(a));
 }
 QBNot::QBNot(const QBNot& a) {
-    this->operands.push_back(std::unique_ptr<QBType>(a.operands.front()->clone()));
+    this->operands.push_back(static_uptr_cast<QBType>(a.operands.front()->clone()));
 }
 
 
@@ -32,7 +33,7 @@ bool QBNot::isNot() const {
     return true;
 }
 
-QBType* QBNot::clone() const {
-    return new QBNot(*this);
+std::unique_ptr<QMType> QBNot::clone() const {
+    return std::unique_ptr<QBNot>(new QBNot(*this));
 }
 }

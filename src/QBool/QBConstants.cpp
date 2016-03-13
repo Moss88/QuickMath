@@ -18,8 +18,8 @@ QBValue QBOne::value() const {
     return QBValue::One;
 }
 
-QBType* QBOne::clone() const {
-    return new QBOne();
+std::unique_ptr<QMType> QBOne::clone() const {
+    return std::unique_ptr<QBOne>(new QBOne());
 }
 
 bool QBOne::isOne() const {
@@ -30,8 +30,8 @@ QBValue QBZero::value() const {
     return QBValue::Zero;
 }
 
-QBType* QBZero::clone() const {
-    return new QBZero();
+std::unique_ptr<QMType> QBZero::clone() const {
+    return std::unique_ptr<QBZero>(new QBZero());
 }
 
 
@@ -43,7 +43,7 @@ QBValue QBDontCare::value() const {
     return QBValue::DontCare;
 }
 
-QBType* QBDontCare::clone() const {
-    return new QBDontCare();
+std::unique_ptr<QMType> QBDontCare::clone() const {
+    return std::unique_ptr<QBDontCare>(new QBDontCare());
 }
 }

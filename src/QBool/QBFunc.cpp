@@ -3,6 +3,7 @@
 #include "QBool/QBAnd.h"
 #include "QBool/QBOr.h"
 #include "QBool/QBNot.h"
+#include "QMDefs.h"
 #include <iostream>
 using std::cout;
 using std::endl;
@@ -20,7 +21,7 @@ QBFunc::QBFunc(bool val) {
 }
 
 QBFunc::QBFunc(const QBFunc& func) {
-    this->bValue = unique_ptr<QBType>(func.bValue->clone());
+    this->bValue = static_uptr_cast<QBType>(func.bValue->clone());
 }
 
 QBFunc::QBFunc(QBFunc&& func) {
@@ -28,14 +29,14 @@ QBFunc::QBFunc(QBFunc&& func) {
 }
 
 QBFunc::QBFunc(const QBType *pVal) {
-    this->bValue = unique_ptr<QBType>(pVal->clone());
+    this->bValue = static_uptr_cast<QBType>(pVal->clone());
 }
 
 
 QBFunc QBFunc::operator=(const QBFunc& func) {
     if(this == &func)
         return *this;
-    this->bValue = unique_ptr<QBType>(func.bValue->clone());
+    this->bValue = static_uptr_cast<QBType>(func.bValue->clone());
     return *this;
 }
 
@@ -213,7 +214,7 @@ QBFunc operator!(const QBFunc& func) {
     else if(func.get()->isOne())
         return QBFunc(false);
     else if(func.get()->isNot())
-        return QBFunc(unique_ptr<QBType>(static_cast<const QBNot*>(func.get())->begin()->get()->clone()));
+        return QBFunc(static_uptr_cast<QBType>(static_cast<const QBNot*>(func.get())->begin()->get()->clone()));
     return QBFunc(unique_ptr<QBNot>(new QBNot(*func.bValue)));
 }
   

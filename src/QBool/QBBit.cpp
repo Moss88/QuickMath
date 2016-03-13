@@ -31,8 +31,8 @@ void QBBit::setValue(QBValue val) {
     this->bb->setVar(val);
 }
 
-QBType* QBBit::clone() const {
-    return new QBBit(this->bb);
+std::unique_ptr<QMType> QBBit::clone() const {
+    return std::unique_ptr<QBBit>(new QBBit(this->bb));
 }
 
 /////////////////// QBBitShared ///////////////////////////
@@ -77,7 +77,7 @@ void QBBitShared::setVar(QBValue val) {
     this->val = val;
 }
 
-QBType* QBBitShared::clone() const {
-    return new QBBitShared(*this);
+std::unique_ptr<QMType> QBBitShared::clone() const {
+    return std::unique_ptr<QBBitShared>(new QBBitShared(*this));
 }
 }

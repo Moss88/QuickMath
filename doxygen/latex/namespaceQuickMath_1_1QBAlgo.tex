@@ -1,0 +1,110 @@
+\hypertarget{namespaceQuickMath_1_1QBAlgo}{}\section{Quick\+Math\+:\+:Q\+B\+Algo Namespace Reference}
+\label{namespaceQuickMath_1_1QBAlgo}\index{Quick\+Math\+::\+Q\+B\+Algo@{Quick\+Math\+::\+Q\+B\+Algo}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structQuickMath_1_1QBAlgo_1_1QBBitCmp}{Q\+B\+Bit\+Cmp}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classQuickMath_1_1QBFunc}{Q\+B\+Func} \hyperlink{namespaceQuickMath_1_1QBAlgo_a38967d834625639ad4040038c274f6c4}{generate\+C\+N\+F} (const \hyperlink{classQuickMath_1_1QBFunc}{Q\+B\+Func} \&func, string prefix, \hyperlink{classQuickMath_1_1QBManager}{Q\+B\+Manager} \&b\+Man)
+\item 
+bool \hyperlink{namespaceQuickMath_1_1QBAlgo_a58928a3d288af7c50e94a63f54b4fd3a}{is\+C\+N\+F\+Not\+Term} (const \hyperlink{classQuickMath_1_1QBNot}{Q\+B\+Not} $\ast$expr)
+\item 
+bool \hyperlink{namespaceQuickMath_1_1QBAlgo_ae084c53f5dedaa733811c3563601379b}{is\+C\+N\+F\+Or\+Term} (const \hyperlink{classQuickMath_1_1QBOr}{Q\+B\+Or} $\ast$expr)
+\item 
+bool \hyperlink{namespaceQuickMath_1_1QBAlgo_af121334ad0919ef45bf1fb0b87f1d31b}{is\+C\+N\+F} (const \hyperlink{classQuickMath_1_1QBFunc}{Q\+B\+Func} \&func)
+\item 
+vector$<$ int $>$ \hyperlink{namespaceQuickMath_1_1QBAlgo_aa04e30fe5d4d870de2adb8e01f7e918e}{run\+Lingeling\+Sat} (std\+::string \&\&dimacs\+Str)
+\item 
+vector$<$ \hyperlink{classQuickMath_1_1QBFunc}{Q\+B\+Func} $>$ \hyperlink{namespaceQuickMath_1_1QBAlgo_a3cffa5407d5ed739d8d3f1d0763a52a7}{is\+Sat} (const \hyperlink{classQuickMath_1_1QBFunc}{Q\+B\+Func} \&func)
+\item 
+{\footnotesize template$<$typename B\+Func , typename Func $>$ }\\bool \hyperlink{namespaceQuickMath_1_1QBAlgo_ac6ae2b1697b8dd4baa5c903589d1c4e9}{depth\+Recur} (B\+Func $\ast$expr, Func func)
+\item 
+{\footnotesize template$<$typename B\+Func , typename Func $>$ }\\void \hyperlink{namespaceQuickMath_1_1QBAlgo_a6ae30dac4638703751de7a5d042d9cb9}{depth\+Traversal} (B\+Func \&expr, Func func)
+\item 
+{\footnotesize template$<$typename Func $>$ }\\void \hyperlink{namespaceQuickMath_1_1QBAlgo_a60bdbfc65190e2ac43e3abcf25ffa400}{depth\+Traversal} (\hyperlink{classQuickMath_1_1QBType}{Q\+B\+Type} \&expr, Func func)
+\item 
+\hyperlink{classQuickMath_1_1QBFunc}{Q\+B\+Func} \hyperlink{namespaceQuickMath_1_1QBAlgo_a35cc2f24230d4675bebd97ba11aaf47e}{generate\+C\+N\+F} (const \hyperlink{classQuickMath_1_1QBFunc}{Q\+B\+Func} \&func, std\+::string prefix, \hyperlink{classQuickMath_1_1QBManager}{Q\+B\+Manager} \&b\+Man)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{namespaceQuickMath_1_1QBAlgo_ac6ae2b1697b8dd4baa5c903589d1c4e9}{}\index{Quick\+Math\+::\+Q\+B\+Algo@{Quick\+Math\+::\+Q\+B\+Algo}!depth\+Recur@{depth\+Recur}}
+\index{depth\+Recur@{depth\+Recur}!Quick\+Math\+::\+Q\+B\+Algo@{Quick\+Math\+::\+Q\+B\+Algo}}
+\subsubsection[{depth\+Recur}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename B\+Func , typename Func $>$ bool Quick\+Math\+::\+Q\+B\+Algo\+::depth\+Recur (
+\begin{DoxyParamCaption}
+\item[{B\+Func $\ast$}]{expr, }
+\item[{Func}]{func}
+\end{DoxyParamCaption}
+)}\label{namespaceQuickMath_1_1QBAlgo_ac6ae2b1697b8dd4baa5c903589d1c4e9}
+\hypertarget{namespaceQuickMath_1_1QBAlgo_a6ae30dac4638703751de7a5d042d9cb9}{}\index{Quick\+Math\+::\+Q\+B\+Algo@{Quick\+Math\+::\+Q\+B\+Algo}!depth\+Traversal@{depth\+Traversal}}
+\index{depth\+Traversal@{depth\+Traversal}!Quick\+Math\+::\+Q\+B\+Algo@{Quick\+Math\+::\+Q\+B\+Algo}}
+\subsubsection[{depth\+Traversal}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename B\+Func , typename Func $>$ void Quick\+Math\+::\+Q\+B\+Algo\+::depth\+Traversal (
+\begin{DoxyParamCaption}
+\item[{B\+Func \&}]{expr, }
+\item[{Func}]{func}
+\end{DoxyParamCaption}
+)}\label{namespaceQuickMath_1_1QBAlgo_a6ae30dac4638703751de7a5d042d9cb9}
+\hypertarget{namespaceQuickMath_1_1QBAlgo_a60bdbfc65190e2ac43e3abcf25ffa400}{}\index{Quick\+Math\+::\+Q\+B\+Algo@{Quick\+Math\+::\+Q\+B\+Algo}!depth\+Traversal@{depth\+Traversal}}
+\index{depth\+Traversal@{depth\+Traversal}!Quick\+Math\+::\+Q\+B\+Algo@{Quick\+Math\+::\+Q\+B\+Algo}}
+\subsubsection[{depth\+Traversal}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Func $>$ void Quick\+Math\+::\+Q\+B\+Algo\+::depth\+Traversal (
+\begin{DoxyParamCaption}
+\item[{{\bf Q\+B\+Type} \&}]{expr, }
+\item[{Func}]{func}
+\end{DoxyParamCaption}
+)}\label{namespaceQuickMath_1_1QBAlgo_a60bdbfc65190e2ac43e3abcf25ffa400}
+\hypertarget{namespaceQuickMath_1_1QBAlgo_a38967d834625639ad4040038c274f6c4}{}\index{Quick\+Math\+::\+Q\+B\+Algo@{Quick\+Math\+::\+Q\+B\+Algo}!generate\+C\+N\+F@{generate\+C\+N\+F}}
+\index{generate\+C\+N\+F@{generate\+C\+N\+F}!Quick\+Math\+::\+Q\+B\+Algo@{Quick\+Math\+::\+Q\+B\+Algo}}
+\subsubsection[{generate\+C\+N\+F}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Q\+B\+Func} Quick\+Math\+::\+Q\+B\+Algo\+::generate\+C\+N\+F (
+\begin{DoxyParamCaption}
+\item[{const {\bf Q\+B\+Func} \&}]{func, }
+\item[{string}]{prefix, }
+\item[{{\bf Q\+B\+Manager} \&}]{b\+Man}
+\end{DoxyParamCaption}
+)}\label{namespaceQuickMath_1_1QBAlgo_a38967d834625639ad4040038c274f6c4}
+\hypertarget{namespaceQuickMath_1_1QBAlgo_a35cc2f24230d4675bebd97ba11aaf47e}{}\index{Quick\+Math\+::\+Q\+B\+Algo@{Quick\+Math\+::\+Q\+B\+Algo}!generate\+C\+N\+F@{generate\+C\+N\+F}}
+\index{generate\+C\+N\+F@{generate\+C\+N\+F}!Quick\+Math\+::\+Q\+B\+Algo@{Quick\+Math\+::\+Q\+B\+Algo}}
+\subsubsection[{generate\+C\+N\+F}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Q\+B\+Func} Quick\+Math\+::\+Q\+B\+Algo\+::generate\+C\+N\+F (
+\begin{DoxyParamCaption}
+\item[{const {\bf Q\+B\+Func} \&}]{func, }
+\item[{std\+::string}]{prefix, }
+\item[{{\bf Q\+B\+Manager} \&}]{b\+Man}
+\end{DoxyParamCaption}
+)}\label{namespaceQuickMath_1_1QBAlgo_a35cc2f24230d4675bebd97ba11aaf47e}
+\hypertarget{namespaceQuickMath_1_1QBAlgo_af121334ad0919ef45bf1fb0b87f1d31b}{}\index{Quick\+Math\+::\+Q\+B\+Algo@{Quick\+Math\+::\+Q\+B\+Algo}!is\+C\+N\+F@{is\+C\+N\+F}}
+\index{is\+C\+N\+F@{is\+C\+N\+F}!Quick\+Math\+::\+Q\+B\+Algo@{Quick\+Math\+::\+Q\+B\+Algo}}
+\subsubsection[{is\+C\+N\+F}]{\setlength{\rightskip}{0pt plus 5cm}bool Quick\+Math\+::\+Q\+B\+Algo\+::is\+C\+N\+F (
+\begin{DoxyParamCaption}
+\item[{const {\bf Q\+B\+Func} \&}]{func}
+\end{DoxyParamCaption}
+)}\label{namespaceQuickMath_1_1QBAlgo_af121334ad0919ef45bf1fb0b87f1d31b}
+\hypertarget{namespaceQuickMath_1_1QBAlgo_a58928a3d288af7c50e94a63f54b4fd3a}{}\index{Quick\+Math\+::\+Q\+B\+Algo@{Quick\+Math\+::\+Q\+B\+Algo}!is\+C\+N\+F\+Not\+Term@{is\+C\+N\+F\+Not\+Term}}
+\index{is\+C\+N\+F\+Not\+Term@{is\+C\+N\+F\+Not\+Term}!Quick\+Math\+::\+Q\+B\+Algo@{Quick\+Math\+::\+Q\+B\+Algo}}
+\subsubsection[{is\+C\+N\+F\+Not\+Term}]{\setlength{\rightskip}{0pt plus 5cm}bool Quick\+Math\+::\+Q\+B\+Algo\+::is\+C\+N\+F\+Not\+Term (
+\begin{DoxyParamCaption}
+\item[{const {\bf Q\+B\+Not} $\ast$}]{expr}
+\end{DoxyParamCaption}
+)}\label{namespaceQuickMath_1_1QBAlgo_a58928a3d288af7c50e94a63f54b4fd3a}
+\hypertarget{namespaceQuickMath_1_1QBAlgo_ae084c53f5dedaa733811c3563601379b}{}\index{Quick\+Math\+::\+Q\+B\+Algo@{Quick\+Math\+::\+Q\+B\+Algo}!is\+C\+N\+F\+Or\+Term@{is\+C\+N\+F\+Or\+Term}}
+\index{is\+C\+N\+F\+Or\+Term@{is\+C\+N\+F\+Or\+Term}!Quick\+Math\+::\+Q\+B\+Algo@{Quick\+Math\+::\+Q\+B\+Algo}}
+\subsubsection[{is\+C\+N\+F\+Or\+Term}]{\setlength{\rightskip}{0pt plus 5cm}bool Quick\+Math\+::\+Q\+B\+Algo\+::is\+C\+N\+F\+Or\+Term (
+\begin{DoxyParamCaption}
+\item[{const {\bf Q\+B\+Or} $\ast$}]{expr}
+\end{DoxyParamCaption}
+)}\label{namespaceQuickMath_1_1QBAlgo_ae084c53f5dedaa733811c3563601379b}
+\hypertarget{namespaceQuickMath_1_1QBAlgo_a3cffa5407d5ed739d8d3f1d0763a52a7}{}\index{Quick\+Math\+::\+Q\+B\+Algo@{Quick\+Math\+::\+Q\+B\+Algo}!is\+Sat@{is\+Sat}}
+\index{is\+Sat@{is\+Sat}!Quick\+Math\+::\+Q\+B\+Algo@{Quick\+Math\+::\+Q\+B\+Algo}}
+\subsubsection[{is\+Sat}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ {\bf Q\+B\+Func} $>$ Quick\+Math\+::\+Q\+B\+Algo\+::is\+Sat (
+\begin{DoxyParamCaption}
+\item[{const {\bf Q\+B\+Func} \&}]{func}
+\end{DoxyParamCaption}
+)}\label{namespaceQuickMath_1_1QBAlgo_a3cffa5407d5ed739d8d3f1d0763a52a7}
+\hypertarget{namespaceQuickMath_1_1QBAlgo_aa04e30fe5d4d870de2adb8e01f7e918e}{}\index{Quick\+Math\+::\+Q\+B\+Algo@{Quick\+Math\+::\+Q\+B\+Algo}!run\+Lingeling\+Sat@{run\+Lingeling\+Sat}}
+\index{run\+Lingeling\+Sat@{run\+Lingeling\+Sat}!Quick\+Math\+::\+Q\+B\+Algo@{Quick\+Math\+::\+Q\+B\+Algo}}
+\subsubsection[{run\+Lingeling\+Sat}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$int$>$ Quick\+Math\+::\+Q\+B\+Algo\+::run\+Lingeling\+Sat (
+\begin{DoxyParamCaption}
+\item[{std\+::string \&\&}]{dimacs\+Str}
+\end{DoxyParamCaption}
+)}\label{namespaceQuickMath_1_1QBAlgo_aa04e30fe5d4d870de2adb8e01f7e918e}

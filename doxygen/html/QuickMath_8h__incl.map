@@ -1,0 +1,21 @@
+<map id="include/QuickMath.h" name="include/QuickMath.h">
+<area shape="rect" id="node2" href="$QMType_8h.html" title="QMType.h" alt="" coords="280,380,363,407"/>
+<area shape="rect" id="node5" href="$QMDefs_8h.html" title="QMDefs.h" alt="" coords="223,231,305,257"/>
+<area shape="rect" id="node6" href="$QBinaryExpr_8h.html" title="./QMix/QBinaryExpr.h" alt="" coords="94,81,245,108"/>
+<area shape="rect" id="node9" href="$QFVar_8h.html" title="./QFunc/QFVar.h" alt="" coords="752,81,875,108"/>
+<area shape="rect" id="node10" href="$QFType_8h.html" title="./QFType.h" alt="" coords="569,231,657,257"/>
+<area shape="rect" id="node12" href="$QFBinaryExpr_8h.html" title="./QFunc/QFBinaryExpr.h" alt="" coords="321,81,487,108"/>
+<area shape="rect" id="node15" href="$QFConstantD_8h.html" title="./QFunc/QFConstantD.h" alt="" coords="563,81,728,108"/>
+<area shape="rect" id="node17" href="$QBFunc_8h.html" title="./QBool/QBFunc.h" alt="" coords="1091,231,1221,257"/>
+<area shape="rect" id="node19" href="$QBType_8h.html" title="./QBType.h" alt="" coords="955,305,1045,332"/>
+<area shape="rect" id="node21" href="$QBVector_8h.html" title="./QBool/QBVector.h" alt="" coords="1288,156,1427,183"/>
+<area shape="rect" id="node23" href="$QBManager_8h.html" title="./QBool/QBManager.h" alt="" coords="1115,81,1266,108"/>
+<area shape="rect" id="node26" href="$QBAlgorithms_8h.html" title="./QBool/QBAlgorithms.h" alt="" coords="877,156,1040,183"/>
+<area shape="rect" id="node7" href="$QExpr_8h.html" title="./QExpr.h" alt="" coords="97,156,175,183"/>
+<area shape="rect" id="node8" href="$QOp_8h.html" title="./QOp.h" alt="" coords="207,305,275,332"/>
+<area shape="rect" id="node13" href="$QFExpr_8h.html" title="./QFExpr.h" alt="" coords="377,156,463,183"/>
+<area shape="rect" id="node16" href="$QFConstant_8h.html" title="./QFConstant.h" alt="" coords="589,156,701,183"/>
+<area shape="rect" id="node18" href="$QBBasicDefs_8h.html" title="./QBBasicDefs.h" alt="" coords="898,380,1019,407"/>
+<area shape="rect" id="node25" href="$QBBit_8h.html" title="./QBBit.h" alt="" coords="1245,231,1321,257"/>
+<area shape="rect" id="node27" href="$QBExpr_8h.html" title="./QBExpr.h" alt="" coords="981,231,1067,257"/>
+</map>

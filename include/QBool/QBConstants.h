@@ -28,21 +28,21 @@ public:
 class QBOne : public QBConstant {
 public:
     QBValue value() const;
-    QBType* clone() const;
+    std::unique_ptr<QMType> clone() const;
     bool isOne() const;
 };
 
 class QBZero : public QBConstant {
 public:
     QBValue value() const;
-    QBType* clone() const;
+    std::unique_ptr<QMType> clone() const;
     bool isZero() const;
 };
 
 class QBDontCare : public QBConstant {
 public:
     QBValue value() const;
-    QBType* clone() const;
+    std::unique_ptr<QMType> clone() const;
 };
 
 }

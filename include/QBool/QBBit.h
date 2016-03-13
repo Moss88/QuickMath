@@ -17,7 +17,7 @@ public:
     int64_t getRef() const;
     const std::string& getName() const;
     void setVar(QBValue val);
-    QBType* clone() const;
+    std::unique_ptr<QMType> clone() const;
 
 private:
     static int64_t refCnt;
@@ -36,7 +36,7 @@ public:
     std::string toString() const;
     QBValue value() const;
     int64_t getRef() const;
-    QBType* clone() const;
+    std::unique_ptr<QMType> clone() const;
     unsigned int getIndex() const;
     const std::string& getName() const;
 

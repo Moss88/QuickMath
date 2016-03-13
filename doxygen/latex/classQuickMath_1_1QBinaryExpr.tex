@@ -1,0 +1,172 @@
+\hypertarget{classQuickMath_1_1QBinaryExpr}{}\section{Quick\+Math\+:\+:Q\+Binary\+Expr Class Reference}
+\label{classQuickMath_1_1QBinaryExpr}\index{Quick\+Math\+::\+Q\+Binary\+Expr@{Quick\+Math\+::\+Q\+Binary\+Expr}}
+
+
+{\ttfamily \#include $<$Q\+Binary\+Expr.\+h$>$}
+
+
+
+Inheritance diagram for Quick\+Math\+:\+:Q\+Binary\+Expr\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=205pt]{classQuickMath_1_1QBinaryExpr__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Quick\+Math\+:\+:Q\+Binary\+Expr\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=205pt]{classQuickMath_1_1QBinaryExpr__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classQuickMath_1_1QBinaryExpr_ae3e8ea0c221e7638af664ca6ce1f73bb}{Q\+Binary\+Expr} ()=default
+\item 
+\hyperlink{classQuickMath_1_1QBinaryExpr_a7d82ba57de6234fefe3becafa1537b80}{Q\+Binary\+Expr} (const \hyperlink{classQuickMath_1_1QBinaryExpr}{Q\+Binary\+Expr} \&other)
+\item 
+\hyperlink{classQuickMath_1_1QBinaryExpr_ad7bef4aa782a97b2a42e368dba19ed12}{Q\+Binary\+Expr} (\hyperlink{namespaceQuickMath_a0a6c67b9dab0cfd5f3e711b0573545cb}{Q\+M\+Op\+Type} type, std\+::unique\+\_\+ptr$<$ \hyperlink{classQuickMath_1_1QMType}{Q\+M\+Type} $>$ \&\&a, std\+::unique\+\_\+ptr$<$ \hyperlink{classQuickMath_1_1QMType}{Q\+M\+Type} $>$ \&\&b)
+\item 
+\hyperlink{classQuickMath_1_1QBinaryExpr_acd2a34c2332a67f3e00e56ab12b6e50f}{Q\+Binary\+Expr} (\hyperlink{namespaceQuickMath_a0a6c67b9dab0cfd5f3e711b0573545cb}{Q\+M\+Op\+Type} type, const \hyperlink{classQuickMath_1_1QMType}{Q\+M\+Type} \&a, const \hyperlink{classQuickMath_1_1QMType}{Q\+M\+Type} \&b)
+\item 
+\hyperlink{classQuickMath_1_1QBinaryExpr}{Q\+Binary\+Expr} \& \hyperlink{classQuickMath_1_1QBinaryExpr_a78895218c64c48c434bed0e80e732bcc}{operator=} (const \hyperlink{classQuickMath_1_1QBinaryExpr}{Q\+Binary\+Expr} \&other)
+\item 
+\hyperlink{classQuickMath_1_1QBinaryExpr}{Q\+Binary\+Expr} \& \hyperlink{classQuickMath_1_1QBinaryExpr_a0bc73ff4a6cd65d152c80a2259b4288b}{operator=} (\hyperlink{classQuickMath_1_1QBinaryExpr}{Q\+Binary\+Expr} \&\&other)
+\item 
+std\+::string \hyperlink{classQuickMath_1_1QBinaryExpr_ac253a522b55817ceeff36229d976dc79}{to\+String} () const 
+\item 
+const \hyperlink{classQuickMath_1_1QMType}{Q\+M\+Type} $\ast$ \hyperlink{classQuickMath_1_1QBinaryExpr_a89a08e6e8e83a664faafcb0ff984c94d}{left\+Operand} () const 
+\item 
+const \hyperlink{classQuickMath_1_1QMType}{Q\+M\+Type} $\ast$ \hyperlink{classQuickMath_1_1QBinaryExpr_a08d4732282c676dc8a57ee3bd2260a04}{right\+Operand} () const 
+\item 
+virtual std\+::array$<$ std\+::unique\+\_\+ptr$<$ \hyperlink{classQuickMath_1_1QMType}{Q\+M\+Type} $>$, 2 $>$\+::const\+\_\+iterator \hyperlink{classQuickMath_1_1QBinaryExpr_a28625c412a7c22d5c1060fa9f3db7877}{begin} () const 
+\item 
+virtual std\+::array$<$ std\+::unique\+\_\+ptr$<$ \hyperlink{classQuickMath_1_1QMType}{Q\+M\+Type} $>$, 2 $>$\+::const\+\_\+iterator \hyperlink{classQuickMath_1_1QBinaryExpr_a14f50114683fddb39cf74f2e82805672}{end} () const 
+\item 
+virtual std\+::unique\+\_\+ptr$<$ \hyperlink{classQuickMath_1_1QMType}{Q\+M\+Type} $>$ \hyperlink{classQuickMath_1_1QBinaryExpr_a1a13bf258ab921b56b63914b40a07909}{clone} () const 
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::array$<$ std\+::unique\+\_\+ptr$<$ \hyperlink{classQuickMath_1_1QMType}{Q\+M\+Type} $>$, 2 $>$ \hyperlink{classQuickMath_1_1QBinaryExpr_a9d788140e4b0eb6d635be7981bc8e60d}{operands}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classQuickMath_1_1QBinaryExpr_ae3e8ea0c221e7638af664ca6ce1f73bb}{}\index{Quick\+Math\+::\+Q\+Binary\+Expr@{Quick\+Math\+::\+Q\+Binary\+Expr}!Q\+Binary\+Expr@{Q\+Binary\+Expr}}
+\index{Q\+Binary\+Expr@{Q\+Binary\+Expr}!Quick\+Math\+::\+Q\+Binary\+Expr@{Quick\+Math\+::\+Q\+Binary\+Expr}}
+\subsubsection[{Q\+Binary\+Expr}]{\setlength{\rightskip}{0pt plus 5cm}Quick\+Math\+::\+Q\+Binary\+Expr\+::\+Q\+Binary\+Expr (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [default]}}\label{classQuickMath_1_1QBinaryExpr_ae3e8ea0c221e7638af664ca6ce1f73bb}
+\hypertarget{classQuickMath_1_1QBinaryExpr_a7d82ba57de6234fefe3becafa1537b80}{}\index{Quick\+Math\+::\+Q\+Binary\+Expr@{Quick\+Math\+::\+Q\+Binary\+Expr}!Q\+Binary\+Expr@{Q\+Binary\+Expr}}
+\index{Q\+Binary\+Expr@{Q\+Binary\+Expr}!Quick\+Math\+::\+Q\+Binary\+Expr@{Quick\+Math\+::\+Q\+Binary\+Expr}}
+\subsubsection[{Q\+Binary\+Expr}]{\setlength{\rightskip}{0pt plus 5cm}Quick\+Math\+::\+Q\+Binary\+Expr\+::\+Q\+Binary\+Expr (
+\begin{DoxyParamCaption}
+\item[{const {\bf Q\+Binary\+Expr} \&}]{other}
+\end{DoxyParamCaption}
+)}\label{classQuickMath_1_1QBinaryExpr_a7d82ba57de6234fefe3becafa1537b80}
+\hypertarget{classQuickMath_1_1QBinaryExpr_ad7bef4aa782a97b2a42e368dba19ed12}{}\index{Quick\+Math\+::\+Q\+Binary\+Expr@{Quick\+Math\+::\+Q\+Binary\+Expr}!Q\+Binary\+Expr@{Q\+Binary\+Expr}}
+\index{Q\+Binary\+Expr@{Q\+Binary\+Expr}!Quick\+Math\+::\+Q\+Binary\+Expr@{Quick\+Math\+::\+Q\+Binary\+Expr}}
+\subsubsection[{Q\+Binary\+Expr}]{\setlength{\rightskip}{0pt plus 5cm}Quick\+Math\+::\+Q\+Binary\+Expr\+::\+Q\+Binary\+Expr (
+\begin{DoxyParamCaption}
+\item[{{\bf Q\+M\+Op\+Type}}]{type, }
+\item[{std\+::unique\+\_\+ptr$<$ {\bf Q\+M\+Type} $>$ \&\&}]{a, }
+\item[{std\+::unique\+\_\+ptr$<$ {\bf Q\+M\+Type} $>$ \&\&}]{b}
+\end{DoxyParamCaption}
+)}\label{classQuickMath_1_1QBinaryExpr_ad7bef4aa782a97b2a42e368dba19ed12}
+\hypertarget{classQuickMath_1_1QBinaryExpr_acd2a34c2332a67f3e00e56ab12b6e50f}{}\index{Quick\+Math\+::\+Q\+Binary\+Expr@{Quick\+Math\+::\+Q\+Binary\+Expr}!Q\+Binary\+Expr@{Q\+Binary\+Expr}}
+\index{Q\+Binary\+Expr@{Q\+Binary\+Expr}!Quick\+Math\+::\+Q\+Binary\+Expr@{Quick\+Math\+::\+Q\+Binary\+Expr}}
+\subsubsection[{Q\+Binary\+Expr}]{\setlength{\rightskip}{0pt plus 5cm}Quick\+Math\+::\+Q\+Binary\+Expr\+::\+Q\+Binary\+Expr (
+\begin{DoxyParamCaption}
+\item[{{\bf Q\+M\+Op\+Type}}]{type, }
+\item[{const {\bf Q\+M\+Type} \&}]{a, }
+\item[{const {\bf Q\+M\+Type} \&}]{b}
+\end{DoxyParamCaption}
+)}\label{classQuickMath_1_1QBinaryExpr_acd2a34c2332a67f3e00e56ab12b6e50f}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classQuickMath_1_1QBinaryExpr_a28625c412a7c22d5c1060fa9f3db7877}{}\index{Quick\+Math\+::\+Q\+Binary\+Expr@{Quick\+Math\+::\+Q\+Binary\+Expr}!begin@{begin}}
+\index{begin@{begin}!Quick\+Math\+::\+Q\+Binary\+Expr@{Quick\+Math\+::\+Q\+Binary\+Expr}}
+\subsubsection[{begin}]{\setlength{\rightskip}{0pt plus 5cm}std\+::array$<$ std\+::unique\+\_\+ptr$<$ {\bf Q\+M\+Type} $>$, 2 $>$\+::const\+\_\+iterator Quick\+Math\+::\+Q\+Binary\+Expr\+::begin (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\label{classQuickMath_1_1QBinaryExpr_a28625c412a7c22d5c1060fa9f3db7877}
+\hypertarget{classQuickMath_1_1QBinaryExpr_a1a13bf258ab921b56b63914b40a07909}{}\index{Quick\+Math\+::\+Q\+Binary\+Expr@{Quick\+Math\+::\+Q\+Binary\+Expr}!clone@{clone}}
+\index{clone@{clone}!Quick\+Math\+::\+Q\+Binary\+Expr@{Quick\+Math\+::\+Q\+Binary\+Expr}}
+\subsubsection[{clone}]{\setlength{\rightskip}{0pt plus 5cm}std\+::unique\+\_\+ptr$<$ {\bf Q\+M\+Type} $>$ Quick\+Math\+::\+Q\+Binary\+Expr\+::clone (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\label{classQuickMath_1_1QBinaryExpr_a1a13bf258ab921b56b63914b40a07909}
+
+
+Implements \hyperlink{classQuickMath_1_1QMType_a15b2a74a662417da99c6da9b7aaeff77}{Quick\+Math\+::\+Q\+M\+Type}.
+
+\hypertarget{classQuickMath_1_1QBinaryExpr_a14f50114683fddb39cf74f2e82805672}{}\index{Quick\+Math\+::\+Q\+Binary\+Expr@{Quick\+Math\+::\+Q\+Binary\+Expr}!end@{end}}
+\index{end@{end}!Quick\+Math\+::\+Q\+Binary\+Expr@{Quick\+Math\+::\+Q\+Binary\+Expr}}
+\subsubsection[{end}]{\setlength{\rightskip}{0pt plus 5cm}std\+::array$<$ std\+::unique\+\_\+ptr$<$ {\bf Q\+M\+Type} $>$, 2 $>$\+::const\+\_\+iterator Quick\+Math\+::\+Q\+Binary\+Expr\+::end (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\label{classQuickMath_1_1QBinaryExpr_a14f50114683fddb39cf74f2e82805672}
+\hypertarget{classQuickMath_1_1QBinaryExpr_a89a08e6e8e83a664faafcb0ff984c94d}{}\index{Quick\+Math\+::\+Q\+Binary\+Expr@{Quick\+Math\+::\+Q\+Binary\+Expr}!left\+Operand@{left\+Operand}}
+\index{left\+Operand@{left\+Operand}!Quick\+Math\+::\+Q\+Binary\+Expr@{Quick\+Math\+::\+Q\+Binary\+Expr}}
+\subsubsection[{left\+Operand}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Q\+M\+Type} $\ast$ Quick\+Math\+::\+Q\+Binary\+Expr\+::left\+Operand (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\label{classQuickMath_1_1QBinaryExpr_a89a08e6e8e83a664faafcb0ff984c94d}
+\hypertarget{classQuickMath_1_1QBinaryExpr_a78895218c64c48c434bed0e80e732bcc}{}\index{Quick\+Math\+::\+Q\+Binary\+Expr@{Quick\+Math\+::\+Q\+Binary\+Expr}!operator=@{operator=}}
+\index{operator=@{operator=}!Quick\+Math\+::\+Q\+Binary\+Expr@{Quick\+Math\+::\+Q\+Binary\+Expr}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Q\+Binary\+Expr} \& Quick\+Math\+::\+Q\+Binary\+Expr\+::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf Q\+Binary\+Expr} \&}]{other}
+\end{DoxyParamCaption}
+)}\label{classQuickMath_1_1QBinaryExpr_a78895218c64c48c434bed0e80e732bcc}
+\hypertarget{classQuickMath_1_1QBinaryExpr_a0bc73ff4a6cd65d152c80a2259b4288b}{}\index{Quick\+Math\+::\+Q\+Binary\+Expr@{Quick\+Math\+::\+Q\+Binary\+Expr}!operator=@{operator=}}
+\index{operator=@{operator=}!Quick\+Math\+::\+Q\+Binary\+Expr@{Quick\+Math\+::\+Q\+Binary\+Expr}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Q\+Binary\+Expr} \& Quick\+Math\+::\+Q\+Binary\+Expr\+::operator= (
+\begin{DoxyParamCaption}
+\item[{{\bf Q\+Binary\+Expr} \&\&}]{other}
+\end{DoxyParamCaption}
+)}\label{classQuickMath_1_1QBinaryExpr_a0bc73ff4a6cd65d152c80a2259b4288b}
+\hypertarget{classQuickMath_1_1QBinaryExpr_a08d4732282c676dc8a57ee3bd2260a04}{}\index{Quick\+Math\+::\+Q\+Binary\+Expr@{Quick\+Math\+::\+Q\+Binary\+Expr}!right\+Operand@{right\+Operand}}
+\index{right\+Operand@{right\+Operand}!Quick\+Math\+::\+Q\+Binary\+Expr@{Quick\+Math\+::\+Q\+Binary\+Expr}}
+\subsubsection[{right\+Operand}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Q\+M\+Type} $\ast$ Quick\+Math\+::\+Q\+Binary\+Expr\+::right\+Operand (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\label{classQuickMath_1_1QBinaryExpr_a08d4732282c676dc8a57ee3bd2260a04}
+\hypertarget{classQuickMath_1_1QBinaryExpr_ac253a522b55817ceeff36229d976dc79}{}\index{Quick\+Math\+::\+Q\+Binary\+Expr@{Quick\+Math\+::\+Q\+Binary\+Expr}!to\+String@{to\+String}}
+\index{to\+String@{to\+String}!Quick\+Math\+::\+Q\+Binary\+Expr@{Quick\+Math\+::\+Q\+Binary\+Expr}}
+\subsubsection[{to\+String}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Quick\+Math\+::\+Q\+Binary\+Expr\+::to\+String (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\label{classQuickMath_1_1QBinaryExpr_ac253a522b55817ceeff36229d976dc79}
+
+
+Implements \hyperlink{classQuickMath_1_1QMType_a031b83c87e4edae28c65adf8e268442b}{Quick\+Math\+::\+Q\+M\+Type}.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classQuickMath_1_1QBinaryExpr_a9d788140e4b0eb6d635be7981bc8e60d}{}\index{Quick\+Math\+::\+Q\+Binary\+Expr@{Quick\+Math\+::\+Q\+Binary\+Expr}!operands@{operands}}
+\index{operands@{operands}!Quick\+Math\+::\+Q\+Binary\+Expr@{Quick\+Math\+::\+Q\+Binary\+Expr}}
+\subsubsection[{operands}]{\setlength{\rightskip}{0pt plus 5cm}std\+::array$<$std\+::unique\+\_\+ptr$<${\bf Q\+M\+Type}$>$, 2$>$ Quick\+Math\+::\+Q\+Binary\+Expr\+::operands\hspace{0.3cm}{\ttfamily [protected]}}\label{classQuickMath_1_1QBinaryExpr_a9d788140e4b0eb6d635be7981bc8e60d}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\+Q\+Mix/\hyperlink{QBinaryExpr_8h}{Q\+Binary\+Expr.\+h}\item 
+src/\+Q\+Mix/\hyperlink{QBinaryExpr_8cpp}{Q\+Binary\+Expr.\+cpp}\end{DoxyCompactItemize}

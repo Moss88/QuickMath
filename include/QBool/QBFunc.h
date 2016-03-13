@@ -59,7 +59,9 @@ public:
 private:
     UQBType bValue;
 };
-
+ 
+QBFunc biConditional(const QBFunc& antecedent, const QBFunc& consequent); 
+QBFunc implication(const QBFunc& antecedent, const QBFunc& consequent); 
 std::ostream& operator<<(std::ostream &stream, const QBFunc& func);
 
 }

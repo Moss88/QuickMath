@@ -14,7 +14,7 @@ public:
 
     std::string toString() const;
     QBValue value() const;
-    QBType* clone() const;
+    std::unique_ptr<QMType> clone() const;
     bool isAnd() const;
 };
 }

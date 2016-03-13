@@ -1,4 +1,5 @@
 #include "QBool/QBAnd.h"
+#include "QMDefs.h"
 #include <iostream>
 namespace QuickMath {
 using std::unique_ptr;
@@ -36,10 +37,10 @@ QBAnd::QBAnd(unique_ptr<QBType> a, const QBType &b) {
     {
         const QBAnd* ptr = static_cast<const QBAnd*>(&b);
         for(auto &op:*ptr)
-            this->operands.push_back(std::unique_ptr<QBType>(op.get()->clone()));
+            this->operands.push_back(static_uptr_cast<QBType>(op.get()->clone()));
     }
     else
-        this->operands.push_back(unique_ptr<QBType>(b.clone()));
+        this->operands.push_back(static_uptr_cast<QBType>(b.clone()));
 }
 
 QBAnd::QBAnd(const QBType& a, unique_ptr<QBType> b) : 
@@ -50,24 +51,24 @@ QBAnd::QBAnd(const QBType &a, const QBType &b) {
     {
         const QBAnd* ptr = static_cast<const QBAnd*>(&a);
         for(auto &op:*ptr)
-            this->operands.push_back(std::unique_ptr<QBType>(op.get()->clone()));
+            this->operands.push_back(static_uptr_cast<QBType>(op.get()->clone()));
     }
     else
-        this->operands.push_back(unique_ptr<QBType>(a.clone()));
+        this->operands.push_back(static_uptr_cast<QBType>(a.clone()));
 
     if(b.isAnd())
     {
         const QBAnd* ptr = static_cast<const QBAnd*>(&b);
         for(auto &op:*ptr)
-            this->operands.push_back(std::unique_ptr<QBType>(op.get()->clone()));
+            this->operands.push_back(static_uptr_cast<QBType>(op.get()->clone()));
     }
     else
-        this->operands.push_back(unique_ptr<QBType>(b.clone()));
+        this->operands.push_back(static_uptr_cast<QBType>(b.clone()));
 }
 
 QBAnd::QBAnd(const QBAnd& other) {
     for(auto &op:other.operands)
-        this->operands.push_back(unique_ptr<QBType>(op->clone()));
+        this->operands.push_back(static_uptr_cast<QBType>(op->clone()));
 }
 
 std::string QBAnd::toString() const {
@@ -101,8 +102,8 @@ bool QBAnd::isAnd() const {
 }
 
 
-QBType* QBAnd::clone() const {
-    return new QBAnd(*this);
+std::unique_ptr<QMType> QBAnd::clone() const {
+    return std::unique_ptr<QBAnd>(new QBAnd(*this));
 }
 
 

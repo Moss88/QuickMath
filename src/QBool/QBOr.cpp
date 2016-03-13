@@ -1,4 +1,5 @@
 #include "QBool/QBOr.h"
+#include "QMDefs.h"
 namespace QuickMath {
 using std::unique_ptr;
 
@@ -34,10 +35,10 @@ QBOr::QBOr(unique_ptr<QBType> a, const QBType &b) {
     {
         const QBOr* ptr = static_cast<const QBOr*>(&b);
         for(auto &op:*ptr)
-            this->operands.push_back(std::unique_ptr<QBType>(op.get()->clone()));
+            this->operands.push_back(static_uptr_cast<QBType>(op.get()->clone()));
     }
     else
-        this->operands.push_back(unique_ptr<QBType>(b.clone()));
+        this->operands.push_back(static_uptr_cast<QBType>(b.clone()));
 }
 
 QBOr::QBOr(const QBType& a, unique_ptr<QBType> b) :
@@ -48,24 +49,24 @@ QBOr::QBOr(const QBType& a, const QBType& b) {
     {
         const QBOr* ptr = static_cast<const QBOr*>(&a);
         for(auto &op:*ptr)
-            this->operands.push_back(std::unique_ptr<QBType>(op.get()->clone()));
+            this->operands.push_back(static_uptr_cast<QBType>(op.get()->clone()));
     }
     else
-        this->operands.push_back(unique_ptr<QBType>(a.clone()));
+        this->operands.push_back(static_uptr_cast<QBType>(a.clone()));
 
     if(b.isOr())
     {
         const QBOr* ptr = static_cast<const QBOr*>(&b);
         for(auto &op:*ptr)
-            this->operands.push_back(std::unique_ptr<QBType>(op.get()->clone()));
+            this->operands.push_back(static_uptr_cast<QBType>(op.get()->clone()));
     }
     else
-        this->operands.push_back(unique_ptr<QBType>(b.clone()));
+        this->operands.push_back(static_uptr_cast<QBType>(b.clone()));
 }
 
 QBOr::QBOr(const QBOr& other) {
     for(auto &op:other.operands)
-        this->operands.push_back(unique_ptr<QBType>(op->clone()));
+        this->operands.push_back(static_uptr_cast<QBType>(op->clone()));
 }
 
 
@@ -100,7 +101,7 @@ bool QBOr::isOr() const {
 }
 
 
-QBType* QBOr::clone() const {
-    return new QBOr(*this);
+std::unique_ptr<QMType> QBOr::clone() const {
+    return std::unique_ptr<QBOr>(new QBOr(*this));
 }
 }
