@@ -37,7 +37,7 @@ QFUnaryExpr& QFUnaryExpr::operator=(QFUnaryExpr&& other) {
 }
     
 std::string QFUnaryExpr::toString() const {
-    return "";
+    return OpTypeToString(this->opType()) + operand->toString();
 }
 
 const QFType* QFUnaryExpr::getOperand() const {
@@ -46,6 +46,10 @@ const QFType* QFUnaryExpr::getOperand() const {
 
 std::unique_ptr<QMType> QFUnaryExpr::clone() const {
     return std::unique_ptr<QFUnaryExpr>(new QFUnaryExpr(*this));
+}
+
+bool QFUnaryExpr::isUnaryExpr() const {
+    return true;
 }
 
 }

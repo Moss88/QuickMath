@@ -15,6 +15,7 @@
 #include "./QFunc/QFType.h"
 #include "./QFunc/QFBinaryExpr.h"
 #include "./QFunc/QFConstantD.h"
+#include "./QFunc/QFUnaryExpr.h"
 
 // Boolean
 #include "./QBool/QBFunc.h"

@@ -12,6 +12,8 @@ class QFUnaryExpr : public QFExpr {
 
     QFUnaryExpr& operator=(const QFUnaryExpr& other);
     QFUnaryExpr& operator=(QFUnaryExpr&& other);
+    
+    bool isUnaryExpr() const;
     const QFType* getOperand() const;
     std::string toString() const;
     std::unique_ptr<QMType> clone() const;

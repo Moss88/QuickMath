@@ -54,7 +54,8 @@ QFBinaryExpr& QFBinaryExpr::operator=(QFBinaryExpr&& other) {
 
 
 std::string QFBinaryExpr::toString() const  {
-    return "";
+    return "(" + leftOperand()->toString() + OpTypeToString(this->opType()) 
+               + rightOperand()->toString() + ")";
 }
 
 std::array<std::unique_ptr<QFType>, 2>::const_iterator 

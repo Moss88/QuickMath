@@ -1,7 +1,8 @@
-#ifndef QF_DEFS_H
-#define QF_DEFS_H
+#ifndef QM_DEFS_H
+#define QM_DEFS_H
 
 #include <memory>
+#include <string>
 
 namespace QuickMath {
 enum class QMOpType {LT, LTE, GT, GTE, NE, EQ, BICOND, 
@@ -26,8 +27,8 @@ dynamic_uptr_cast(std::unique_ptr<Base, Del> && p) {
     return std::unique_ptr<Derived, Del>(nullptr, p.get_deleter());
 }
 
+std::string OpTypeToString(QMOpType op);
 }
-
 
 
 

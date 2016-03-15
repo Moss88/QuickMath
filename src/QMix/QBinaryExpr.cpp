@@ -42,7 +42,8 @@ QBinaryExpr& QBinaryExpr::operator=(QBinaryExpr&& other) {
 }
     
 std::string QBinaryExpr::toString() const {
-    return "";
+    return "(" + leftOperand()->toString() + OpTypeToString(this->opType()) 
+               + rightOperand()->toString() + ")";
 }
 
 const QMType* QBinaryExpr::leftOperand() const {
