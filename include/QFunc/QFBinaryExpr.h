@@ -13,7 +13,7 @@ class QFBinaryExpr : public QFExpr {
     QFBinaryExpr(QMOpType type, const QFType& a, const QFType& b); 
     QFBinaryExpr& operator=(const QFBinaryExpr& other);
     QFBinaryExpr& operator=(QFBinaryExpr&& other);
-    
+    bool isBinaryExpr() const; 
     
     std::string toString() const;
     const QFType* leftOperand() const;

@@ -11,18 +11,6 @@ public:
         return true;
     }
     
-    virtual bool isVar() const {
-        return false;
-    }
-
-    virtual bool isExpr() const {
-        return false;
-    }
-
-    virtual bool isConstant() const {
-        return false;
-    }
-
 };
 
 

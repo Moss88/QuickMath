@@ -67,6 +67,10 @@ QFBinaryExpr::end() const {
    return operands.cend();
 } 
 
+bool QFBinaryExpr::isBinaryExpr() const {
+    return true;
+}
+
 const QFType* QFBinaryExpr::leftOperand() const {
     return operands[0].get();
 }

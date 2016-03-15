@@ -8,6 +8,7 @@
 
 // Mix
 #include "./QMix/QBinaryExpr.h"
+#include "./QMix/QUnaryExpr.h"
 
 // Function
 #include "./QFunc/QFVar.h"

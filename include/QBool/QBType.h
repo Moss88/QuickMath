@@ -14,14 +14,7 @@ public:
         return true;
     }
     
-    virtual bool isVar() const {
-        return false;
-    }
-
-    virtual bool isExpr() const {
-        return false;
-    }
-    virtual bool isAnd() const {
+   virtual bool isAnd() const {
         return false;
     }
     virtual bool isOr() const {

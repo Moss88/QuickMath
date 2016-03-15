@@ -1,7 +1,17 @@
 #include "QMType.h"
 
 namespace QuickMath {
-
+    bool QMType::isVar() const {
+        return false;
+    }
+    
+    bool QMType::isExpr() const {
+        return false; 
+    }
+    
+    bool QMType::isConstant() const {
+        return false; 
+    }
 
     bool QMType::isBoolType() const {
         return false;

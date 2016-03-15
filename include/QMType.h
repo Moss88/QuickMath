@@ -11,6 +11,9 @@ class QMType {
     virtual bool isBoolType() const;
     virtual bool isFuncType() const;
     virtual bool isMixedType() const;
+    virtual bool isVar() const;
+    virtual bool isExpr() const;
+    virtual bool isConstant() const;
     virtual std::unique_ptr<QMType> clone() const = 0;
     protected:
     friend std::ostream& operator<< (std::ostream& outStream, const QMType& val);
