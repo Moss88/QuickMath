@@ -36,7 +36,7 @@ namespace QuickMath {
     }
     
     std::string QUnaryExpr::toString() const {
-        return "";
+        return OpTypeToString(this->opType()) + operand->toString();
     }
 
     const QMType* QUnaryExpr::getOperand() const {
