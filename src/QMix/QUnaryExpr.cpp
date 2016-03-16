@@ -47,6 +47,9 @@ namespace QuickMath {
         return std::unique_ptr<QUnaryExpr>(new QUnaryExpr(*this));
     }
 
+    bool QUnaryExpr::isUnaryExpr() const {
+        return true;
+    }
 }
 
 

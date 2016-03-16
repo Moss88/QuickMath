@@ -16,6 +16,7 @@ class QUnaryExpr : public QExpr {
     QUnaryExpr& operator=(const QUnaryExpr& other);
     QUnaryExpr& operator=(QUnaryExpr&& other);
     
+    bool isUnaryExpr() const;
     std::string toString() const;
     const QMType* getOperand() const;
     virtual std::unique_ptr<QMType> clone() const;

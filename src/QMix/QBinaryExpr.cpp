@@ -66,5 +66,9 @@ std::unique_ptr<QMType> QBinaryExpr::clone() const {
     return std::unique_ptr<QMType>(nullptr);
 }
 
+bool QBinaryExpr::isBinaryExpr() const {
+    return true;
+}
+
 }
 

@@ -18,6 +18,7 @@ class QBinaryExpr : public QExpr {
     QBinaryExpr& operator=(QBinaryExpr&& other);
     
     
+    bool isBinaryExpr() const;
     std::string toString() const;
     const QMType* leftOperand() const;
     const QMType* rightOperand() const;
