@@ -9,6 +9,8 @@ enum class QMOpType {LT, LTE, GT, GTE, NE, EQ, BICOND,
 					 IMPL, LAND, LOR, LNOT, BAND, BOR, 
 					 BNOT, UKNWN};
 
+enum class DataType {INT, DOUBLE, BOOL, UKNWN};
+
 template<typename Derived, typename Base>
 std::unique_ptr<Derived>
 static_uptr_cast(std::unique_ptr<Base> && p) {

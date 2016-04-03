@@ -24,7 +24,7 @@ public:
     std::vector<QBFunc>::const_iterator begin() const;
     std::vector<QBFunc>::const_iterator end() const;
     unsigned int size() const;
-
+    int64_t convertToInt() const;
 private:
     std::vector<QBFunc> bits;
 };

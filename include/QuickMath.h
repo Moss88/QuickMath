@@ -23,5 +23,6 @@
 #include "./QBool/QBVector.h"
 #include "./QBool/QBManager.h"
 #include "./QBool/QBAlgorithms.h"
+#include "./QBool/QBNot.h"
 
 #endif

@@ -150,6 +150,7 @@ vector<int> runLingelingSat(std::string &&dimacsStr) {
     string filePath = path;
 
 
+    vector<int> solution;
     // Fork
     if(!fork())
     {
@@ -185,7 +186,6 @@ vector<int> runLingelingSat(std::string &&dimacsStr) {
             }
             else if(buffer[0] == 'v')
             {
-                vector<int> solution;
                 buffer[0] = ' ';
                 std::stringstream ss(buffer);
                 int num = 1;
@@ -195,12 +195,11 @@ vector<int> runLingelingSat(std::string &&dimacsStr) {
                     if(num != 0)
                         solution.push_back(num);
                 }
-                return move(solution);
             }
         }
         close(c2pFD[0]);
     }
-    return vector<int>();
+    return std::move(solution);
 }
 
 vector<QBFunc> isSat(const QBFunc& func) {
@@ -271,10 +270,8 @@ vector<QBFunc> isSat(const QBFunc& func) {
         buffer << "0" << std::endl;
         ++nClauses;
     }
-
     vector<int> idSolution = std::move(runLingelingSat("p cnf " + std::to_string(refToId.size()) + " " +
                             std::to_string(nClauses) + "\n" + buffer.str()));
-    
     vector<QBFunc> solution;
     for(auto id:idSolution)
     {

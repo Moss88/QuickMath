@@ -1,6 +1,7 @@
 #include "QBool/QBVector.h"
 #include "QBool/QBFunc.h"
 #include "QBool/QBAlgorithms.h"
+#include "QBool/QBBit.h"
 #include <iostream>
 using std::cout;
 using std::endl;
@@ -98,6 +99,21 @@ std::vector<QBFunc>::const_iterator QBVector::end() const {
 
 unsigned int QBVector::size() const {
     return bits.size();
+}
+
+int64_t QBVector::convertToInt() const {
+    int64_t twoPow = 1;
+    int64_t decNum = 0; 
+    for(unsigned int i = 0; i < bits.size(); i++)
+    {
+        auto value = static_cast<const QBBit*>(bits[i].get())->value();
+        if(value == QBValue::One)
+            decNum += twoPow;
+        else if(value != QBValue::Zero)
+            return -1;
+        twoPow *= 2;
+    }
+    return decNum;    
 }
 
 }
