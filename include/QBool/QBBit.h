@@ -18,7 +18,7 @@ public:
     const std::string& getName() const;
     void setVar(QBValue val);
     std::unique_ptr<QMType> clone() const;
-
+    
 private:
     static int64_t refCnt;
 
@@ -39,7 +39,10 @@ public:
     std::unique_ptr<QMType> clone() const;
     unsigned int getIndex() const;
     const std::string& getName() const;
-
+    void setShared(std::shared_ptr<QBBitShared> bb);
+    const QBBitShared* getShared() const;
+    bool isTempVar() const;
+    std::shared_ptr<QBBitShared> getSharedPtr();
 private:
     std::shared_ptr<QBBitShared> bb;
 };

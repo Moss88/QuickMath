@@ -35,6 +35,22 @@ std::unique_ptr<QMType> QBBit::clone() const {
     return std::unique_ptr<QBBit>(new QBBit(this->bb));
 }
 
+const QBBitShared* QBBit::getShared() const {
+    return bb.get();
+}
+
+std::shared_ptr<QBBitShared> QBBit::getSharedPtr() {
+    return bb;
+}
+
+void QBBit::setShared(std::shared_ptr<QBBitShared> bb) {
+    this->bb = bb;
+}
+
+
+bool QBBit::isTempVar() const {
+    return tmpVarName == getName(); 
+}
 /////////////////// QBBitShared ///////////////////////////
 int64_t QBBitShared::refCnt = 0;
 QBBitShared::QBBitShared(const std::string& name, 
@@ -80,4 +96,7 @@ void QBBitShared::setVar(QBValue val) {
 std::unique_ptr<QMType> QBBitShared::clone() const {
     return std::unique_ptr<QBBitShared>(new QBBitShared(*this));
 }
+
+
 }
+

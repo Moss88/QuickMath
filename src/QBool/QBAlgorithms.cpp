@@ -23,14 +23,14 @@ namespace QuickMath {
 namespace QBAlgo {
 
 
-QBFunc generateCNF(const QBFunc& func, string prefix, QBManager& bMan) {
+QBFunc generateCNF(const QBFunc& func, QBManager& bMan) {
     if(!func.get()->isExpr())
         return func;
     QBFunc CNF(true);
-    unsigned int cnt = 0;
     stack<tuple<const QBExpr*, QBFunc>> ptrs;
+    QBFunc topLevelTemp = bMan.getTempVar();
     ptrs.push(std::make_tuple(dynamic_cast<const QBExpr*>(func.get()),
-                              bMan.getBit(prefix, cnt++)));
+                                topLevelTemp));
     QBFunc topVar = std::get<1>(ptrs.top());
     while(!ptrs.empty())
     {
@@ -48,7 +48,7 @@ QBFunc generateCNF(const QBFunc& func, string prefix, QBManager& bMan) {
             if(op->isExpr())
             {
                 const QBExpr* opExpr = dynamic_cast<const QBExpr*>(op.get());
-                QBFunc bit = bMan.getBit(prefix, cnt++);
+                QBFunc bit = bMan.getTempVar();
                 ptrs.push(std::make_tuple(opExpr, bit));
                 operands.push_back(bit);
             }
@@ -85,7 +85,7 @@ QBFunc generateCNF(const QBFunc& func, string prefix, QBManager& bMan) {
         else
             throw std::runtime_error("Unknown expression type for CNF generation");
     }
-    return std::move(CNF) & std::move(topVar);
+    return std::move(std::move(CNF) & std::move(topVar));
 }
 
 bool isCNFNotTerm(const QBNot* expr) {
@@ -285,4 +285,36 @@ vector<QBFunc> isSat(const QBFunc& func) {
 
 
 }
+/*
+QBFunc QBAlgo::dnfToCnf(const QBFunc& func) {
+    auto topOr = dynamic_cast<const QBOr*>(func.get());
+    if(!topOr)
+        throw std::runtime_error("dnfToCnf: not in DNF form, no top level or");
+
+    auto topAnd = std::unique_ptr<QBAnd>(new QBAnd());
+    // There are three possibilites here, and, literal, not
+    // Apply Demorgan
+    for(auto &expr:topOr)
+    {
+        if(expr->isAnd())
+        {
+            auto opExpr = std::unique_ptr<QBOr>(new QBOr());
+            for(auto    
+        }
+        else if(expr->isNot())
+        {
+        }
+        else if(expr->isVar())
+        {
+        }
+        else
+            throw std::runtime_error("dnfToCnf: not in DNF form, expected conjunctive term");
+    }
+
+
 }
+*/
+}
+
+
+

@@ -14,6 +14,7 @@ typedef std::unique_ptr<QBBit> UQBBit;
 enum class QBValue {Unknown, One, Zero, DontCare};
 
 std::string to_string(const QBValue& value);
+extern std::string tmpVarName;
 }
 #endif // BOOLBASICDEFS_H
 

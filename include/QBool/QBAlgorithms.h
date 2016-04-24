@@ -36,10 +36,11 @@ void depthTraversal(QBType& expr, Func func) {
     depthRecur(&expr, func);
 }
 
-QBFunc generateCNF(const QBFunc& func, std::string prefix, QBManager& bMan);
+QBFunc generateCNF(const QBFunc& func, QBManager& bMan);
 bool isCNF(const QBFunc &func);
 std::vector<QBFunc> isSat(const QBFunc& func);
 
+QBFunc dnfToCnf(const QBFunc& func);
 
 
 }

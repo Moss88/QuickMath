@@ -3,6 +3,7 @@
 #include <string>
 #include <map>
 #include <memory>
+#include <list>
 #include "./QBFunc.h"
 #include "./QBVector.h"
 #include "./QBBit.h"
@@ -22,12 +23,17 @@ class QBManager {
     };
 
 public:
-    QBManager() = default;
+    QBManager();
+    QBFunc getTempVar();
     QBFunc getBit(const std::string& name, int idx = 0);
     QBVector getBitVector(const std::string& name, unsigned int size);
     void setValue(QBValue val, const std::string& name, int idx = 0);
     unsigned int numberVars() const;
+    ~QBManager();
+
 private:
+    int64_t tCount = 0;
+    std::list<std::shared_ptr<QBBitShared>> tempVars;
     std::map<KeyPair, std::shared_ptr<QBBitShared>> vars;
 };
 
