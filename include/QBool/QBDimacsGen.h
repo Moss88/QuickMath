@@ -4,8 +4,8 @@
 #include <vector>
 #include <tuple>
 #include <string>
-#include "QBDimacsFunc.h"
-#include "QFunc/QFVar.h"
+#include "./QBDimacsFunc.h"
+#include "../QFunc/QFVar.h"
 
 namespace QuickMath {
 class QBDimacsGen {
@@ -14,19 +14,51 @@ class QBDimacsGen {
         QBDimacsGen() = default;
                                                                      // Vars and Sizes
         void addFunction(const QBDimacsFunc* dFunc, 
-                const std::vector<std::tuple<const QFVar*,int>>& vars);
+                const std::vector<std::tuple<const QFVar*, int>>& vars);
         std::string getDimacs() const;
         int getNumClauses() const;
         int getNumVars() const; 
+        bool isSat() const; 
+        std::vector<std::tuple<QFVar, unsigned int>> getSat() const;
     private:
+        
+
+        struct VarInfo {
+            VarInfo(const QFVar& var, int index, int vecSize) :
+                            var(var), idx(index), size(vecSize) {}
+            QFVar var;
+            int idx = 0;
+            int size = 0; 
+        };
+
+        struct Range  {
+            Range(int l, int u) : lower(l), upper(u){}
+            int getLength() const { return upper - lower + 1;}
+            int lower;
+            int upper;
+        };
+
+        struct RangeCmp {
+            bool operator()(const Range& a, const Range& b) const {
+                return a.upper < b.lower; 
+            }
+        };
+
 
         bool validate(const QBDimacsFunc* dFunc, 
             const std::vector<std::tuple<const QFVar*, int>>& vars);
 
+        int addVar(const QFVar* var, int size);
 
         int curIdx = 1;
-                                   // VarIdx, Size
-        std::map<std::string, std::tuple<int, int>> varMap; 
+
+        // Lookup for Input Vars
+        std::map<std::string, int> varMap; 
+        
+        // Idx Range
+        std::map<Range, QFVar, RangeCmp> refToVar; 
+        
+        //std::map<int, std::tuple<int, int>> varMap; 
         std::vector<std::tuple<const QBDimacsFunc*, std::vector<int>, int>> funcs;
 };
 }

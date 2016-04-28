@@ -4,8 +4,8 @@
 #include <map>
 #include <tuple>
 #include <iostream>
-#include "QBool/QBFunc.h"
-#include "QBool/QBBit.h"
+#include "./QBFunc.h"
+#include "./QBBit.h"
 
 namespace QuickMath {
 class QBDimacsFunc {

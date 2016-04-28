@@ -25,5 +25,7 @@
 #include "./QBool/QBAlgorithms.h"
 #include "./QBool/QBNot.h"
 #include "./QBool/QBFuncGen.h"
+#include "./QBool/QBDimacsGen.h"
+#include "./QBool/QBDimacsFunc.h"
 
 #endif

@@ -145,14 +145,13 @@ void QBDimacsFunc::cnfsToStream(std::ostream& os, const std::vector<int>& inputI
     
     for(auto &cnf:cnfs)
     {
-        os << "0 ";
         for(auto &literal:cnf)
         {
             int signMulti = (literal < 0) * -1 + (literal > 0) * 1;
             int idx = signMulti * literal;
             os << signMulti * mappingVec[idx] << " ";
         }
-        os << "\n";
+        os << "0\n";
     } 
 }
 
