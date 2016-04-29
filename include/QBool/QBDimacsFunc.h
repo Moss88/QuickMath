@@ -11,6 +11,7 @@ namespace QuickMath {
 class QBDimacsFunc {
 
     public:
+        QBDimacsFunc() = default;
         QBDimacsFunc(const QBFunc& bfunc, const std::vector<std::tuple<std::string, int>>& inputs);
         int numVars() const;
         int numClauses() const;

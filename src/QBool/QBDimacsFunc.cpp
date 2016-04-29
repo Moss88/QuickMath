@@ -84,33 +84,52 @@ void QBDimacsFunc::insertCNFLiteral(const QBBit* bit, bool positive)
 }
 
 void QBDimacsFunc::setupCNFs(const QBFunc& func) {
+    auto processVar = [&](const QBType* expr) {
+        auto bit = static_cast<const QBBit*>(expr);
+        insertCNFLiteral(bit, true);
+    };
+
+    auto processNot = [&](const QBType* expr) {
+        auto notOp = static_cast<const QBNot*>(expr);
+        const QBBit* bit = dynamic_cast<const QBBit*>(notOp->begin()->get());
+        if(!bit)
+            throw std::runtime_error("QBDimacs: function is not CNF, expression not and: " + func.toString());
+        insertCNFLiteral(bit, false);
+    };
+
+    
+    if(func.get()->isVar())
+    {
+        processVar(func.get());
+        return;
+    }
+    else if(func.get()->isNot()) 
+    {
+        processNot(func.get());
+        return;
+    }
+
     const QBAnd* andExpr = dynamic_cast<const QBAnd*>(func.get());
     if(!andExpr)
-        throw std::runtime_error("QBDimacs: function is not CNF, expression not and");
+        throw std::runtime_error("QBDimacs: function is not CNF, expression not and: " + func.toString());
     for(auto &term:*andExpr)
     {
         cnfs.push_back(std::vector<int>());
         if(term->isVar())
-        {
-            const QBBit* bit = static_cast<const QBBit*>(term.get());
-            insertCNFLiteral(bit, true);
-        }
+            processVar(term.get());
+        else if(term->isNot())
+            processNot(term.get());
         else if(term->isOr())
         {
             const QBOr* orExpr = static_cast<const QBOr*>(term.get());
             for(auto &op:*orExpr)
             {
-                if(op->isExpr())
-                {
-                    const QBNot* notOp = dynamic_cast<const QBNot*>(op.get());
-                    const QBBit* bit = dynamic_cast<const QBBit*>(notOp->begin()->get());
-                    insertCNFLiteral(bit, false);       
-                }
+                if(op->isNot())
+                    processNot(op.get());
                 else if(op->isVar())
-                {
-                    const QBBit* bit = static_cast<const QBBit*>(op.get());
-                    insertCNFLiteral(bit, true);
-                }
+                    processVar(op.get());
+                else
+                    throw std::runtime_error("QBDimacs: function is not CNF, expression not and: " + func.toString());
             }
         }
         else
