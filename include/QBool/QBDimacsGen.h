@@ -14,22 +14,14 @@ class QBDimacsGen {
         QBDimacsGen() = default;
                                                                      // Vars and Sizes
         void addFunction(const QBDimacsFunc* dFunc, 
-                const std::vector<std::tuple<const QFVar*, int>>& vars);
+                const std::vector<std::tuple<const QFType*, int>>& vars);
         std::string getDimacs() const;
         int getNumClauses() const;
         int getNumVars() const; 
         bool isSat() const; 
-        std::vector<std::tuple<QFVar, unsigned int>> getSat() const;
+        std::vector<std::tuple<const QFType*, unsigned int>> getSat() const;
     private:
         
-
-        struct VarInfo {
-            VarInfo(const QFVar& var, int index, int vecSize) :
-                            var(var), idx(index), size(vecSize) {}
-            QFVar var;
-            int idx = 0;
-            int size = 0; 
-        };
 
         struct Range  {
             Range(int l, int u) : lower(l), upper(u){}
@@ -46,9 +38,9 @@ class QBDimacsGen {
 
 
         bool validate(const QBDimacsFunc* dFunc, 
-            const std::vector<std::tuple<const QFVar*, int>>& vars);
+            const std::vector<std::tuple<const QFType*, int>>& vars);
 
-        int addVar(const QFVar* var, int size);
+        int addVar(const QFType* var, int size);
 
         int curIdx = 1;
 
@@ -56,7 +48,7 @@ class QBDimacsGen {
         std::map<std::string, int> varMap; 
         
         // Idx Range
-        std::map<Range, QFVar, RangeCmp> refToVar; 
+        std::map<Range, const QFType*, RangeCmp> refToVar; 
         
         //std::map<int, std::tuple<int, int>> varMap; 
         std::vector<std::tuple<const QBDimacsFunc*, std::vector<int>, int>> funcs;

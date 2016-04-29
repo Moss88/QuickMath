@@ -76,7 +76,7 @@ TEST(QBDimacsGen, cnf) {
    
     QBDimacsGen dGen;
     QFVar x("x"), y("y"), z("z");
-    std::vector<std::tuple<const QFVar*, int>> inVec = {std::make_tuple(&x, 2),
+    std::vector<std::tuple<const QFType*, int>> inVec = {std::make_tuple(&x, 2),
                                                         std::make_tuple(&y, 2)};
     dGen.addFunction(&dFunc, inVec);
     inVec = {std::make_tuple(&y, 2), std::make_tuple(&z, 2)};
@@ -100,7 +100,7 @@ TEST(QBDimacsGen, cnfTseytin) {
    
     QBDimacsGen dGen;
     QFVar x("x"), y("y"), z("z");
-    std::vector<std::tuple<const QFVar*, int>> inVec = {std::make_tuple(&x, 2),
+    std::vector<std::tuple<const QFType*, int>> inVec = {std::make_tuple(&x, 2),
                                                        std::make_tuple(&y, 2)};
     dGen.addFunction(&dFunc, inVec);
     inVec = {std::make_tuple(&y, 2), std::make_tuple(&z, 2)};
@@ -123,7 +123,7 @@ TEST(QBDimacsGen, sat) {
    
     QBDimacsGen dGen;
     QFVar x("x"), y("y");
-    std::vector<std::tuple<const QFVar*, int>> inVec = {std::make_tuple(&x, 1),
+    std::vector<std::tuple<const QFType*, int>> inVec = {std::make_tuple(&x, 1),
                                                         std::make_tuple(&y, 1)};
     dGen.addFunction(&dFunc, inVec);
     EXPECT_EQ(dGen.isSat(), true);
@@ -131,7 +131,7 @@ TEST(QBDimacsGen, sat) {
     EXPECT_EQ(resultVec.size(), 2);
     int lower = -1;
     int upper = -1;
-    if(std::get<0>(resultVec.front()).getName() == "x")
+    if(std::get<0>(resultVec.front())->toString() == x.toString())
         EXPECT_LT(std::get<1>(resultVec.front()), std::get<1>(resultVec.back()));
     else
         EXPECT_LT(std::get<1>(resultVec.back()), std::get<1>(resultVec.front()));

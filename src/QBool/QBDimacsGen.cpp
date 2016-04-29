@@ -4,7 +4,7 @@
 #include <cmath>
 namespace QuickMath {
 
-int QBDimacsGen::addVar(const QFVar* var, int size) {
+int QBDimacsGen::addVar(const QFType* var, int size) {
     std::string name = var->toString();
     auto srchIter = varMap.find(name);
     if(srchIter == varMap.end())
@@ -12,14 +12,14 @@ int QBDimacsGen::addVar(const QFVar* var, int size) {
         int orgIdx = curIdx;
         curIdx += size;
         varMap[name] = orgIdx;
-        refToVar[Range(orgIdx, curIdx - 1)] = *var;
+        refToVar[Range(orgIdx, curIdx - 1)] = var;
         return orgIdx;
     }
     return srchIter->second;       
 }
 
 void QBDimacsGen::addFunction(const QBDimacsFunc* dFunc, 
-                              const std::vector<std::tuple<const QFVar*, int>>& vars) {
+                              const std::vector<std::tuple<const QFType*, int>>& vars) {
     if(!validate(dFunc, vars))
         throw std::runtime_error("QBDimacsGen.addFunction: invalid input vector"); 
    
@@ -33,7 +33,7 @@ void QBDimacsGen::addFunction(const QBDimacsFunc* dFunc,
     curIdx += dFunc->numTmpVars();
 }
 
-bool QBDimacsGen::validate(const QBDimacsFunc* dFunc, const std::vector<std::tuple<const QFVar*, int>>& vars)
+bool QBDimacsGen::validate(const QBDimacsFunc* dFunc, const std::vector<std::tuple<const QFType*, int>>& vars)
 {
     auto& inputVec = dFunc->getInputs();
     if(vars.size() != inputVec.size())
@@ -59,15 +59,15 @@ bool QBDimacsGen::isSat() const {
     return QBAlgo::runLingelingSat(getDimacs()).size() > 0;
 }
 
-std::vector<std::tuple<QFVar, unsigned int>> QBDimacsGen::getSat() const {
+std::vector<std::tuple<const QFType*, unsigned int>> QBDimacsGen::getSat() const {
     auto resultVec = QBAlgo::runLingelingSat(getDimacs());
 
-    std::map<const QFVar*, unsigned int> resultMap;
-    std::vector<std::tuple<QFVar, unsigned int>> retVec;
+    std::map<const QFType*, unsigned int> resultMap;
+    std::vector<std::tuple<const QFType*, unsigned int>> retVec;
 
     // Init Map
     for(auto &key:refToVar)
-        resultMap[&key.second] = 0;
+        resultMap[key.second] = 0;
  
      // Set Integer Values
     for(auto ref:resultVec)
@@ -77,13 +77,13 @@ std::vector<std::tuple<QFVar, unsigned int>> QBDimacsGen::getSat() const {
             auto srchIter = refToVar.find(Range(ref, ref));
             if(srchIter == refToVar.end())
                 continue;
-            resultMap[&srchIter->second] = std::pow(ref - srchIter->first.lower + 1, 2);
+            resultMap[srchIter->second] = std::pow(ref - srchIter->first.lower + 1, 2);
         }
     }
    
     // Flatten
     for(auto &key:resultMap)
-       retVec.push_back(std::make_tuple(*key.first, key.second));
+       retVec.push_back(std::make_tuple(key.first, key.second));
    return std::move(retVec); 
 }
 
