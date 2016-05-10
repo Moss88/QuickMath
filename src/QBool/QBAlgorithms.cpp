@@ -5,7 +5,11 @@
 #include "QBool/QBOr.h"
 #include "QBool/QBNot.h"
 #include "QBool/QBFunc.h"
-
+extern "C" {
+#include "picosat.h"
+}
+#include <atomic>
+#include <fstream>
 #include <iostream>
 #include <string>
 #include <stack>
@@ -21,8 +25,14 @@ using std::tuple;
 using std::vector;
 namespace QuickMath {
 namespace QBAlgo {
+/*
+extern "C" {
+    PicoSAT * picosat_init (void); 
+    int picosat_deref (PicoSAT *, int lit);
+    int picosat_sat (PicoSAT *, int decision_limit);
 
-
+};
+*/
 QBFunc generateCNF(const QBFunc& func, QBManager& bMan) {
     if(!func.get()->isExpr())
         return func;
@@ -130,8 +140,36 @@ struct QBBitCmp{
     }
 };
 
+// Should Be Dimacs Compatiable, a Zero Should be Placed at the end of Each Clause
+vector<int> runPicoSat(const std::vector<std::vector<int>>& input, int nVars)
+{
+    // Might Want To Insert A Lock Guard Here, i have doubts on PICO's threading capabilites
+    vector<int> resultVec;
+    const int decisionLimit = 10000;
+    auto solver = picosat_init();
+    if(nVars >= 0)
+        picosat_adjust(solver, nVars);
+
+    for(auto &clause:input)
+        for(auto &lit:clause)
+            picosat_add(solver, lit);
+    
+    auto result = picosat_sat(solver, decisionLimit);
+    if(result == PICOSAT_UNKNOWN)
+        throw std::runtime_error("runPicoSat: Unknown Solution");
+    else if(result == PICOSAT_SATISFIABLE)
+    {
+        int nPicoVars = picosat_variables(solver);
+        resultVec = std::vector<int>(nPicoVars, 0);
+        for(int i = 0; i < nPicoVars; ++i)
+            resultVec[i] = picosat_deref(solver, i + 1) * (i + 1);
+    }
+    return std::move(resultVec);
+}
+
 
 vector<int> runLingelingSat(std::string &&dimacsStr) {
+    
     int p2cFD[2];
     int c2pFD[2];
 

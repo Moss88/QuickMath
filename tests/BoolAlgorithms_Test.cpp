@@ -2,7 +2,8 @@
 #include "QBool/QBManager.h"
 #include "QBool/QBBit.h"
 #include "QBool/QBAlgorithms.h"
-#include<iostream>
+#include <iostream>
+#include <future>
 using namespace std;
 using namespace QuickMath;
 TEST(QBAlgo, isCNF) {
@@ -70,6 +71,51 @@ TEST(QBAlgo, CNF) {
     EXPECT_TRUE(QBAlgo::isCNF(cnf)) << "Failed CNF: "
                                       << cnf;
 */
+}
+
+TEST(QBAlgo, picoSat)
+{
+    std::vector<std::vector<int>> clauses;
+    clauses.push_back({1, 2, 0});
+    clauses.push_back({1, -2, 0});
+    auto result = QBAlgo::runPicoSat(clauses, 2);
+    EXPECT_TRUE(!result.empty());
+
+    clauses.clear();
+    clauses.push_back({1, 2, 0});
+    clauses.push_back({-1, 0});
+    clauses.push_back({-2, 0});
+    result = QBAlgo::runPicoSat(clauses, 2);
+    EXPECT_TRUE(result.empty());
+
+    clauses.clear();
+    clauses.push_back({1, 2, 3, 0});
+    clauses.push_back({-2, 0});
+    clauses.push_back({-3, 0});
+    result = QBAlgo::runPicoSat(clauses, 3);
+    ASSERT_EQ(result.size(), 3);
+    EXPECT_EQ(result[0], 1);
+    EXPECT_EQ(result[1], -2);
+    EXPECT_EQ(result[2], -3);
+} 
+
+TEST(QBAlgo, parallelPico) {
+    
+    std::vector<std::vector<int>> clauses;
+    clauses.push_back({1, 2, 3, 0});
+    clauses.push_back({-2, 0});
+    clauses.push_back({-3, 0});
+    
+    auto satFunc = [&clauses]() {
+        return !QBAlgo::runPicoSat(clauses, 3).empty();
+    };
+
+    vector<std::future<bool>> futures;
+    for(int i = 0; i < 100000; i++)
+        futures.push_back(std::async(satFunc));
+
+    for(auto &future:futures)
+        ASSERT_TRUE(future.get());
 }
 
 

@@ -16,10 +16,12 @@ class QBDimacsGen {
         void addFunction(const QBDimacsFunc* dFunc, 
                 const std::vector<std::tuple<const QFType*, int>>& vars);
         std::string getDimacs() const;
+        std::vector<std::vector<int>> getClauses() const;
         int getNumClauses() const;
         int getNumVars() const; 
         bool isSat() const; 
-        std::vector<std::tuple<const QFType*, unsigned int>> getSat() const;
+        std::vector<std::tuple<const QFType*, unsigned int>> getSat(bool includeBits = true) const;
+        std::string getDebug() const;
     private:
         
 

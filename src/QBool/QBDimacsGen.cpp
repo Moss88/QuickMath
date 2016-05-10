@@ -55,27 +55,41 @@ std::string QBDimacsGen::getDimacs() const {
     return std::move(ss.str());
 }
 
-bool QBDimacsGen::isSat() const {
-    return QBAlgo::runLingelingSat(getDimacs()).size() > 0;
+std::vector<std::vector<int>> QBDimacsGen::getClauses() const {
+    std::vector<std::vector<int>> clauses;
+    for(auto &func:funcs)
+    {
+        auto funcClauses = std::get<0>(func)->getClauses(std::get<1>(func), std::get<2>(func));
+        clauses.insert(clauses.end(), funcClauses.begin(), funcClauses.end()); 
+    }
+    return std::move(clauses);
+
 }
 
-std::vector<std::tuple<const QFType*, unsigned int>> QBDimacsGen::getSat() const {
-    auto resultVec = QBAlgo::runLingelingSat(getDimacs());
+bool QBDimacsGen::isSat() const {
+    return QBAlgo::runPicoSat(getClauses(), getNumVars()).size() > 0;
+}
+
+// Can filter single bits, used for BFAST
+std::vector<std::tuple<const QFType*, unsigned int>> QBDimacsGen::getSat(bool includeBits) const {
+    auto resultVec = QBAlgo::runPicoSat(getClauses(), getNumVars());
 
     std::map<const QFType*, unsigned int> resultMap;
     std::vector<std::tuple<const QFType*, unsigned int>> retVec;
 
     // Init Map
     for(auto &key:refToVar)
-        resultMap[key.second] = 0;
- 
+    {
+        if(key.first.getLength() > 1 || includeBits)
+            resultMap[key.second] = 0;
+    }
      // Set Integer Values
     for(auto ref:resultVec)
     {
         if(ref >= 0)
         {
             auto srchIter = refToVar.find(Range(ref, ref));
-            if(srchIter == refToVar.end())
+            if(srchIter == refToVar.end() || ((srchIter->first.getLength() < 2) && !includeBits))
                 continue;
             resultMap[srchIter->second] = std::pow(ref - srchIter->first.lower + 1, 2);
         }
@@ -99,5 +113,17 @@ int QBDimacsGen::getNumVars() const {
     return curIdx;
 } 
 
+std::string QBDimacsGen::getDebug() const {
+    std::stringstream ss;
+    ss << "Variable Map: " << std::endl;
+    for(auto &varMaps:refToVar) 
+        ss << varMaps.second->toString() << ": " << varMaps.first.lower << "," << varMaps.first.upper << std::endl;
+    ss << "Dimac: " << std::endl;
+    for(auto &func:funcs) {
+        ss << "Function: " << std::endl;
+        std::get<0>(func)->cnfsToStream(ss, std::get<1>(func), std::get<2>(func));
+    }
+    return ss.str();
+}
 
 }

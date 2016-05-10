@@ -100,11 +100,13 @@ void QBDimacsFunc::setupCNFs(const QBFunc& func) {
     
     if(func.get()->isVar())
     {
+        cnfs.push_back(std::vector<int>());
         processVar(func.get());
         return;
     }
     else if(func.get()->isNot()) 
     {
+        cnfs.push_back(std::vector<int>());
         processNot(func.get());
         return;
     }
@@ -174,5 +176,42 @@ void QBDimacsFunc::cnfsToStream(std::ostream& os, const std::vector<int>& inputI
     } 
 }
 
+std::vector<std::vector<int>> 
+QBDimacsFunc::getClauses(const std::vector<int>& inputIdxs, int tmpVarSIdx) const {
+    if(inputIdxs.size() != inputOrder.size())
+        throw std::runtime_error("QBDimacsFunc.cnfsToStream: incompatible input size");
+
+    std::vector<int> mappingVec(refLocs.size(), 0);
+    // Map Vars
+    int inputNum = 0;
+    for(auto &input:inputOrder)
+    {
+        int startIdx = inputIdxs[inputNum];
+        const std::tuple<int,int>& ref = vecMap.find(std::get<0>(input))->second;
+        int orgIdx = std::get<0>(ref);
+        for(int i = 0; i < std::get<1>(ref); ++i)
+           mappingVec[orgIdx + i] = startIdx + i; 
+        inputNum++;
+    }
+    
+    
+
+    // Map Temp Vars
+    for(auto &key:tmpVars)
+        mappingVec[key.second] = tmpVarSIdx++;
+    std::vector<std::vector<int>> clauses;
+    for(auto &cnf:cnfs)
+    {
+        clauses.push_back(std::vector<int>());
+        for(auto &literal:cnf)
+        {
+            int signMulti = (literal < 0) * -1 + (literal > 0) * 1;
+            int idx = signMulti * literal;
+            clauses.back().push_back(signMulti * mappingVec[idx]);
+        }
+        clauses.back().push_back(0);
+    }
+    return std::move(clauses); 
+}
 
 }

@@ -6,11 +6,7 @@
 namespace QuickMath { 
 class QFType : public QMType {
 public:
-
-    bool isFuncType() const {
-        return true;
-    }
-    
+    bool isFuncType() const; 
 };
 
 

@@ -16,6 +16,8 @@ class QBDimacsFunc {
         int numVars() const;
         int numClauses() const;
         void cnfsToStream(std::ostream& os, const std::vector<int>& inputIdxs, int tmpVarSIdx) const;
+        std::vector<std::vector<int>> 
+            getClauses(const std::vector<int>& inputIdxs, int tmpVarSIdx) const;
         int numTmpVars() const;
         const std::vector<std::tuple<std::string, int>>& getInputs() const;
     private:

@@ -37,6 +37,7 @@ void depthTraversal(QBType& expr, Func func) {
 }
 
 std::vector<int> runLingelingSat(std::string &&dimacsStr);
+std::vector<int> runPicoSat(const std::vector<std::vector<int>>& input, int nVars);
 QBFunc generateCNF(const QBFunc& func, QBManager& bMan);
 bool isCNF(const QBFunc &func);
 std::vector<QBFunc> isSat(const QBFunc& func);
