@@ -15,7 +15,7 @@ SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS} ${COMMON_CXX_FLAGS} -g")
 
 # Now build our tools
 add_library(quickmath SHARED ${PROJECT_SOURCES})
-#target_link_libraries(quickmath picosat)
+target_link_libraries(quickmath picosat)
 
 install(TARGETS quickmath DESTINATION /usr/lib)
 install (DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../include/" DESTINATION /usr/include/QuickMath)
