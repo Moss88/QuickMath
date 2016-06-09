@@ -18,6 +18,11 @@ namespace QuickMath {
             case QMOpType::BAND: return "&";
             case QMOpType::BOR: return "|";
             case QMOpType::BNOT: return "~";
+            case QMOpType::IADD: return "+";
+            case QMOpType::ISUB: return "-";
+            case QMOpType::IMUL: return "*";
+            case QMOpType::IDIV: return "/";
+            case QMOpType::ASSIGN: return "=";
             case QMOpType::UKNWN:
             default: return "?";
         }

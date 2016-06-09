@@ -7,7 +7,7 @@
 namespace QuickMath {
 enum class QMOpType {LT, LTE, GT, GTE, NE, EQ, BICOND, 
 					 IMPL, LAND, LOR, LNOT, BAND, BOR, 
-					 BNOT, UKNWN};
+					 BNOT, IADD, ISUB, IMUL, IDIV, ASSIGN, UKNWN};
 
 enum class DataType {INT, DOUBLE, BOOL, UKNWN};
 

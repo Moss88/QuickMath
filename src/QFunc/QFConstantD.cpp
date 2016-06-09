@@ -12,4 +12,9 @@ std::unique_ptr<QMType> QFConstantD::clone() const {
 std::string QFConstantD::toString() const {
     return std::move(std::to_string(value));
 }
+
+double QFConstantD::getValue() const {
+    return value;
+}    
+
 }

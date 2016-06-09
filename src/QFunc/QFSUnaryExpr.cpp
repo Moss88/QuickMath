@@ -5,7 +5,7 @@ namespace QuickMath {
 
 QFSUnaryExpr::QFSUnaryExpr(const QFSUnaryExpr& other) {
     this->op = other.op;
-    operand = static_uptr_cast<QFType>(other.clone());
+    operand = static_uptr_cast<QFType>(other.operand->clone());
 }
 
 QFSUnaryExpr::QFSUnaryExpr(QMOpType type, std::shared_ptr<QFType>&& expr) {

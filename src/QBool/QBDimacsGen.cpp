@@ -27,6 +27,7 @@ void QBDimacsGen::addFunction(const QBDimacsFunc* dFunc,
     for(auto &var:vars)
     {
         int idx = addVar(std::get<0>(var), std::get<1>(var));
+        //std::cout << std::get<0>(var)->toString() << " idx " << idx << std::endl;
         mapInput.push_back(idx);
     }
     funcs.push_back(std::make_tuple(dFunc, std::move(mapInput), curIdx));
@@ -72,18 +73,32 @@ bool QBDimacsGen::isSat() const {
 
 // Can filter single bits, used for BFAST
 std::vector<std::tuple<const QFType*, unsigned int>> QBDimacsGen::getSat(bool includeBits) const {
-    auto resultVec = QBAlgo::runPicoSat(getClauses(), getNumVars());
+   /*
+    std::cout << "Result Vec: " << std::endl;
+    for(auto &lit:resultVec)
+        std::cout << lit << " ";
+    std::cout << std::endl;
+
+    std::cout << "Ref Map: " << std::endl;
+    for(auto &ref:refToVar)
+        std::cout << ref.first.lower << "," << ref.first.upper << ": " << ref.second->toString() << std::endl; 
+*/
 
     std::map<const QFType*, unsigned int> resultMap;
     std::vector<std::tuple<const QFType*, unsigned int>> retVec;
-
+    
+    auto resultVec = QBAlgo::runPicoSat(getClauses(), getNumVars());
+    if(resultVec.size() == 0)
+        return retVec;
+ 
     // Init Map
     for(auto &key:refToVar)
     {
         if(key.first.getLength() > 1 || includeBits)
             resultMap[key.second] = 0;
     }
-     // Set Integer Values
+    
+    // Set Integer Values
     for(auto ref:resultVec)
     {
         if(ref >= 0)
@@ -91,14 +106,16 @@ std::vector<std::tuple<const QFType*, unsigned int>> QBDimacsGen::getSat(bool in
             auto srchIter = refToVar.find(Range(ref, ref));
             if(srchIter == refToVar.end() || ((srchIter->first.getLength() < 2) && !includeBits))
                 continue;
-            resultMap[srchIter->second] = std::pow(ref - srchIter->first.lower + 1, 2);
+            auto& val = resultMap[srchIter->second];
+            val += std::pow(ref - srchIter->first.lower + 1, 2);
         }
     }
    
     // Flatten
     for(auto &key:resultMap)
        retVec.push_back(std::make_tuple(key.first, key.second));
-   return std::move(retVec); 
+    
+    return std::move(retVec); 
 }
 
 

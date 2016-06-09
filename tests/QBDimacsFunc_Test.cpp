@@ -137,4 +137,44 @@ TEST(QBDimacsGen, sat) {
         EXPECT_LT(std::get<1>(resultVec.back()), std::get<1>(resultVec.front()));
 }
 
+TEST(QBDimacsGen, vecTest) {
+    QBManager bm;
+    auto a = bm.getBitVector("a", 3);
+    auto b = bm.getBitVector("b", 3);
+    
+    QBFunc f = a < b;
+    QBFunc ts = QBAlgo::generateCNF(f, bm);
+ 
+    std::vector<std::tuple<std::string, int>> inputMap;
+    inputMap.push_back(std::make_tuple("a", 3));
+    inputMap.push_back(std::make_tuple("b", 3));
+    QBDimacsFunc dFunc(ts, inputMap);
+   
+    QBDimacsGen dGen;
+    QFVar w("w"), x("x"), y("y");
+    // x < w < z < y
+    std::vector<std::tuple<const QFType*, int>> inVec;
+   
+    inVec = {std::make_tuple(&x, 3), std::make_tuple(&w, 3)};
+    dGen.addFunction(&dFunc, inVec);
+    inVec = {std::make_tuple(&w, 3), std::make_tuple(&y, 3)};
+    dGen.addFunction(&dFunc, inVec);
 
+    std::vector<const QFType*> order = {&x, &w, &y};
+    std::map<const QFType*, int> resultOrder;
+    auto resultVec = dGen.getSat(false);
+    ASSERT_GT(resultVec.size(), 0); 
+    for(auto &result:resultVec) 
+        resultOrder[std::get<0>(result)] = std::get<1>(result);
+    
+    for(auto iter = order.begin() + 1; iter != order.end(); ++iter)
+    {
+        auto left = resultOrder.find(*(iter - 1));
+        ASSERT_NE(left, resultOrder.end());
+
+        auto right = resultOrder.find(*iter);
+        ASSERT_NE(right, resultOrder.end());
+
+        EXPECT_LT(left->second, right->second);
+    }
+}

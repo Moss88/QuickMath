@@ -7,7 +7,7 @@ class QFConstantD : public QFConstant {
         QFConstantD() = default;
         QFConstantD(double val);
         QFConstantD(const QFConstantD& other);
-        
+        double getValue() const;        
         std::unique_ptr<QMType> clone() const;
         std::string toString() const;
     private:

@@ -100,7 +100,6 @@ TEST(QBAlgo, picoSat)
 } 
 
 TEST(QBAlgo, parallelPico) {
-    
     std::vector<std::vector<int>> clauses;
     clauses.push_back({1, 2, 3, 0});
     clauses.push_back({-2, 0});

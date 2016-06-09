@@ -18,6 +18,7 @@ extern "C" {
 #include <sstream>
 #include <cassert>
 #include <unistd.h>
+#include <mutex>
 
 using std::string;
 using std::stack;
@@ -143,7 +144,9 @@ struct QBBitCmp{
 // Should Be Dimacs Compatiable, a Zero Should be Placed at the end of Each Clause
 vector<int> runPicoSat(const std::vector<std::vector<int>>& input, int nVars)
 {
-    // Might Want To Insert A Lock Guard Here, i have doubts on PICO's threading capabilites
+    static std::mutex picoMutex;
+
+    std::unique_lock<std::mutex> lock(picoMutex); 
     vector<int> resultVec;
     const int decisionLimit = 10000;
     auto solver = picosat_init();
