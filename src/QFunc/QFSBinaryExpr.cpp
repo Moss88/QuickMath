@@ -84,4 +84,21 @@ std::unique_ptr<QMType> QFSBinaryExpr::clone() const {
     return  std::unique_ptr<QMType>(new QFSBinaryExpr(*this));
 }
 
+size_t QFSBinaryExpr::numOperands() const {
+    return 2;
+}
+
+const QFType* QFSBinaryExpr::getOperand(size_t idx) const {
+    if(idx > 1)
+        throw std::runtime_error("QFSBinaryExpr.getOperand: invalid idx");
+    return operands[idx].get(); 
+} 
+
+QFType* QFSBinaryExpr::getOperand(size_t idx) {
+    if(idx > 1)
+        throw std::runtime_error("QFSBinaryExpr.getOperand: invalid idx");
+    return operands[idx].get(); 
+} 
+
+
 }

@@ -16,7 +16,7 @@ class QBDimacsGen {
         void addFunction(const QBDimacsFunc* dFunc, 
                 const std::vector<std::tuple<const QFType*, int>>& vars);
         std::string getDimacs() const;
-        std::vector<std::vector<int>> getClauses() const;
+        std::vector<int> getClauses() const;
         int getNumClauses() const;
         int getNumVars() const; 
         bool isSat() const; 

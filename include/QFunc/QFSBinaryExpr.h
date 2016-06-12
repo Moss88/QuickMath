@@ -18,6 +18,11 @@ class QFSBinaryExpr : public QFExpr {
     std::string toString() const;
     const QFType* leftOperand() const;
     const QFType* rightOperand() const;
+    
+    size_t numOperands() const;
+    const QFType* getOperand(size_t idx) const; 
+    QFType* getOperand(size_t idx); 
+
     virtual std::array<std::shared_ptr<QFType>, 2>::const_iterator begin() const;  
     virtual std::array<std::shared_ptr<QFType>, 2>::const_iterator end() const; 
     virtual std::unique_ptr<QMType> clone() const;

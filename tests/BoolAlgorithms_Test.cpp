@@ -75,23 +75,18 @@ TEST(QBAlgo, CNF) {
 
 TEST(QBAlgo, picoSat)
 {
-    std::vector<std::vector<int>> clauses;
-    clauses.push_back({1, 2, 0});
-    clauses.push_back({1, -2, 0});
+    std::vector<int> clauses;
+    clauses = {1, 2, 0, 1, -2, 0};
     auto result = QBAlgo::runPicoSat(clauses, 2);
     EXPECT_TRUE(!result.empty());
 
     clauses.clear();
-    clauses.push_back({1, 2, 0});
-    clauses.push_back({-1, 0});
-    clauses.push_back({-2, 0});
+    clauses = {1, 2, 0, -1, 0, -2, 0};
     result = QBAlgo::runPicoSat(clauses, 2);
     EXPECT_TRUE(result.empty());
 
     clauses.clear();
-    clauses.push_back({1, 2, 3, 0});
-    clauses.push_back({-2, 0});
-    clauses.push_back({-3, 0});
+    clauses = {1, 2, 3, 0, -2, 0, -3, 0};
     result = QBAlgo::runPicoSat(clauses, 3);
     ASSERT_EQ(result.size(), 3);
     EXPECT_EQ(result[0], 1);
@@ -100,10 +95,8 @@ TEST(QBAlgo, picoSat)
 } 
 
 TEST(QBAlgo, parallelPico) {
-    std::vector<std::vector<int>> clauses;
-    clauses.push_back({1, 2, 3, 0});
-    clauses.push_back({-2, 0});
-    clauses.push_back({-3, 0});
+    std::vector<int> clauses;
+    clauses = {1, 2, 3, 0, -2, 0, -3, 0};
     
     auto satFunc = [&clauses]() {
         return !QBAlgo::runPicoSat(clauses, 3).empty();

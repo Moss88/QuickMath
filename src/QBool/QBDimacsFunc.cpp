@@ -11,7 +11,7 @@ QBDimacsFunc::QBDimacsFunc(const QBFunc& bfunc, const std::vector<std::tuple<std
     refLocs.push_back(std::vector<std::tuple<int,int>>()); // Ref zero is invalid
     setupVarMaps(bfunc);
     setupCNFs(bfunc);
-    
+    setDimacSize();
 }
 
 const std::vector<std::tuple<std::string, int>>& 
@@ -176,7 +176,7 @@ void QBDimacsFunc::cnfsToStream(std::ostream& os, const std::vector<int>& inputI
     } 
 }
 
-std::vector<std::vector<int>> 
+std::vector<int> 
 QBDimacsFunc::getClauses(const std::vector<int>& inputIdxs, int tmpVarSIdx) const {
     if(inputIdxs.size() != inputOrder.size())
         throw std::runtime_error("QBDimacsFunc.cnfsToStream: incompatible input size");
@@ -193,25 +193,30 @@ QBDimacsFunc::getClauses(const std::vector<int>& inputIdxs, int tmpVarSIdx) cons
            mappingVec[orgIdx + i] = startIdx + i; 
         inputNum++;
     }
-    
-    
 
     // Map Temp Vars
     for(auto &key:tmpVars)
         mappingVec[key.second] = tmpVarSIdx++;
-    std::vector<std::vector<int>> clauses;
+    std::vector<int> dimacsOut(dimacSize, 0);
+    auto literalIter = dimacsOut.begin();
     for(auto &cnf:cnfs)
     {
-        clauses.push_back(std::vector<int>());
         for(auto &literal:cnf)
         {
             int signMulti = (literal < 0) * -1 + (literal > 0) * 1;
             int idx = signMulti * literal;
-            clauses.back().push_back(signMulti * mappingVec[idx]);
+            *literalIter = signMulti * mappingVec[idx];
+            ++literalIter;
         }
-        clauses.back().push_back(0);
+        ++literalIter; // Zero should already be present
     }
-    return std::move(clauses); 
+    return std::move(dimacsOut); 
 }
 
+void QBDimacsFunc::setDimacSize() {
+    dimacSize = 0;
+    for(auto cnf:cnfs)
+        dimacSize += cnf.size() + 1;
+}
+    
 }

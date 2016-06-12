@@ -52,6 +52,22 @@ bool QFSUnaryExpr::isUnaryExpr() const {
     return true;
 }
 
+size_t QFSUnaryExpr::numOperands() const {
+    return 1;
+}
+
+const QFType* QFSUnaryExpr::getOperand(size_t idx) const {
+    if(idx > 0)
+        throw std::runtime_error("QFSUnaryExpr.getOperand: invalid idx");
+    return operand.get();
+} 
+
+QFType* QFSUnaryExpr::getOperand(size_t idx) {
+    if(idx > 0)
+        throw std::runtime_error("QFSUnaryExpr.getOperand: invalid idx");
+    return operand.get();
+} 
+  
 }
 
 

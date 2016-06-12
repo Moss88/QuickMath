@@ -18,6 +18,10 @@ class QFSUnaryExpr : public QFExpr {
     std::string toString() const;
     std::unique_ptr<QMType> clone() const;
     
+    size_t numOperands() const;
+    const QFType* getOperand(size_t idx) const; 
+    QFType* getOperand(size_t idx); 
+    
     private:
     std::shared_ptr<QFType> operand;
 

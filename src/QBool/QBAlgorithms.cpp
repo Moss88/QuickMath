@@ -142,7 +142,7 @@ struct QBBitCmp{
 };
 
 // Should Be Dimacs Compatiable, a Zero Should be Placed at the end of Each Clause
-vector<int> runPicoSat(const std::vector<std::vector<int>>& input, int nVars)
+vector<int> runPicoSat(const std::vector<int>& input, int nVars)
 {
     static std::mutex picoMutex;
 
@@ -153,9 +153,8 @@ vector<int> runPicoSat(const std::vector<std::vector<int>>& input, int nVars)
     if(nVars >= 0)
         picosat_adjust(solver, nVars);
 
-    for(auto &clause:input)
-        for(auto &lit:clause)
-            picosat_add(solver, lit);
+    for(auto &lit:input)
+        picosat_add(solver, lit);
     
     auto result = picosat_sat(solver, decisionLimit);
     if(result == PICOSAT_UNKNOWN)

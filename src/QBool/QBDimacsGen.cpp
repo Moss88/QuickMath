@@ -56,15 +56,14 @@ std::string QBDimacsGen::getDimacs() const {
     return std::move(ss.str());
 }
 
-std::vector<std::vector<int>> QBDimacsGen::getClauses() const {
-    std::vector<std::vector<int>> clauses;
+std::vector<int> QBDimacsGen::getClauses() const {
+    std::vector<int> clauses;
     for(auto &func:funcs)
     {
         auto funcClauses = std::get<0>(func)->getClauses(std::get<1>(func), std::get<2>(func));
         clauses.insert(clauses.end(), funcClauses.begin(), funcClauses.end()); 
     }
     return std::move(clauses);
-
 }
 
 bool QBDimacsGen::isSat() const {

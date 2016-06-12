@@ -21,6 +21,11 @@ class QFBinaryExpr : public QFExpr {
     virtual std::array<std::unique_ptr<QFType>, 2>::const_iterator begin() const;  
     virtual std::array<std::unique_ptr<QFType>, 2>::const_iterator end() const; 
     virtual std::unique_ptr<QMType> clone() const;
+  
+    size_t numOperands() const;
+    const QFType* getOperand(size_t idx) const; 
+    QFType* getOperand(size_t idx); 
+  
     protected:
     std::array<std::unique_ptr<QFType>, 2> operands;
 };
