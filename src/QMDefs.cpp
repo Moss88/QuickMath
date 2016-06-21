@@ -7,7 +7,7 @@ namespace QuickMath {
             case QMOpType::LT: return "<";
             case QMOpType::LTE: return "<=";
             case QMOpType::GT: return ">";
-            case QMOpType::GTE: return "<=";
+            case QMOpType::GTE: return ">=";
             case QMOpType::NE: return "!=";
             case QMOpType::EQ: return "==";
             case QMOpType::BICOND: return "<->";
