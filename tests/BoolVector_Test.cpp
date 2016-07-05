@@ -8,26 +8,47 @@
 using namespace std;
 using namespace QuickMath;
 TEST(QBVector, lt) {
-    QBManager bm;
-    QBVector vA = bm.getBitVector("a", 2);
-    QBVector vB = bm.getBitVector("b", 2);
+    {
+        QBManager bm;
+        QBVector vA = bm.getBitVector("a", 2);
+        QBVector vB = bm.getBitVector("b", 2);
 
+        QBFunc lt = vA < vB;
+        bm.setValue(QBValue::One, "a", 0);
+        bm.setValue(QBValue::Zero, "a", 1);
+        bm.setValue(QBValue::Zero, "b", 0);
+        bm.setValue(QBValue::One, "b", 1);
+        QBValue val = lt.evaluate();
+        EXPECT_EQ(val, QBValue::One);
 
-    QBFunc lt = vA < vB;
-    bm.setValue(QBValue::One, "a", 0);
-    bm.setValue(QBValue::Zero, "a", 1);
-    bm.setValue(QBValue::Zero, "b", 0);
-    bm.setValue(QBValue::One, "b", 1);
-    QBValue val = lt.evaluate();
-    EXPECT_EQ(val, QBValue::One);
+        bm.setValue(QBValue::One, "a", 1);
+        val = lt.evaluate();
+        EXPECT_EQ(val, QBValue::Zero);
 
-    bm.setValue(QBValue::One, "a", 1);
-    val = lt.evaluate();
-    EXPECT_EQ(val, QBValue::Zero);
+        bm.setValue(QBValue::Zero, "a", 0);
+        val = lt.evaluate();
+        EXPECT_EQ(val, QBValue::Zero);
+    }
+    {
+        QBManager bm;
+        QBVector vA = bm.getBitVector("a", 3);
+        QBVector vB = bm.getBitVector("b", 3);
 
-    bm.setValue(QBValue::Zero, "a", 0);
-    val = lt.evaluate();
-    EXPECT_EQ(val, QBValue::Zero);
+        QBFunc lt = vA < vB;
+        bm.setValue(QBValue::One, "a", 0);
+        bm.setValue(QBValue::One, "a", 1);
+        bm.setValue(QBValue::Zero, "a", 2);
+        
+        bm.setValue(QBValue::Zero, "b", 0);
+        bm.setValue(QBValue::Zero, "b", 1);
+        bm.setValue(QBValue::One, "b", 2);
+        QBValue val = lt.evaluate();
+        EXPECT_EQ(val, QBValue::One);
+
+        bm.setValue(QBValue::One, "a", 2);
+        val = lt.evaluate();
+        EXPECT_EQ(val, QBValue::Zero);
+    }
 }
 
 TEST(QBVector, eq)

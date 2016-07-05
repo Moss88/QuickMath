@@ -28,6 +28,7 @@ public:
     QBFunc getBit(const std::string& name, int idx = 0);
     QBVector getBitVector(const std::string& name, unsigned int size);
     void setValue(QBValue val, const std::string& name, int idx = 0);
+    unsigned int numberTempVars() const;
     unsigned int numberVars() const;
     ~QBManager();
 

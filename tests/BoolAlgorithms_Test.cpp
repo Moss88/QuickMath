@@ -30,6 +30,42 @@ TEST(QBAlgo, isCNF) {
                                       << eq;
 }
 
+TEST(QBAlgo, CNFEff) {
+    {
+        QBManager bm;
+        QBFunc a = bm.getBit("a");
+        QBFunc b = bm.getBit("b");
+        QBFunc c = bm.getBit("c");
+        QBFunc d = bm.getBit("d");
+
+        // 4 to 5 tseitin variables
+        QBFunc eq = !(a & b) | (!c & !d);
+        auto cnf = QBAlgo::generateCNF(eq, bm);
+        EXPECT_EQ(bm.numberTempVars(), 4); 
+    }
+    {
+        QBManager bm;
+        QBFunc a = bm.getBit("a");
+        QBFunc b = bm.getBit("b");
+        QBFunc c = bm.getBit("c");
+        QBFunc d = bm.getBit("d");
+
+        QBFunc eq = !(a & b) | !(!c & !d);
+        auto cnf = QBAlgo::generateCNF(eq, bm);
+        EXPECT_EQ(bm.numberTempVars(), 5);
+    }
+
+    {
+        QBManager bm;
+        auto a = bm.getBitVector("a", 4);
+        auto b = bm.getBitVector("b", 4);
+        auto eq = a < b;
+        auto cnf = QBAlgo::generateCNF(eq, bm);
+        EXPECT_EQ(bm.numberTempVars(), 18);
+    }
+
+}
+
 TEST(QBAlgo, CNF) {
     QBManager bm;
     QBFunc a = bm.getBit("a");

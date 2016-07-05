@@ -26,14 +26,14 @@ using std::tuple;
 using std::vector;
 namespace QuickMath {
 namespace QBAlgo {
-/*
-extern "C" {
-    PicoSAT * picosat_init (void); 
-    int picosat_deref (PicoSAT *, int lit);
-    int picosat_sat (PicoSAT *, int decision_limit);
 
-};
-*/
+bool isInvVar(const QBType* expr) {
+    if(expr->isNot())
+        return static_cast<const QBNot*>(expr)->begin()->get()->isVar();
+    return false;
+}
+
+
 QBFunc generateCNF(const QBFunc& func, QBManager& bMan) {
     if(!func.get()->isExpr())
         return func;
@@ -56,7 +56,7 @@ QBFunc generateCNF(const QBFunc& func, QBManager& bMan) {
         for(auto &op:*expr)
         {
 
-            if(op->isExpr())
+            if(op->isExpr() && !isInvVar(op.get()))
             {
                 const QBExpr* opExpr = dynamic_cast<const QBExpr*>(op.get());
                 QBFunc bit = bMan.getTempVar();
@@ -99,14 +99,10 @@ QBFunc generateCNF(const QBFunc& func, QBManager& bMan) {
     return std::move(std::move(CNF) & std::move(topVar));
 }
 
-bool isCNFNotTerm(const QBNot* expr) {
-    return expr->begin()->get()->isVar();
-}
-
 bool isCNFOrTerm(const QBOr* expr) {
     for(auto &literal:*expr)
     {
-        if((literal->isNot() && !isCNFNotTerm(static_cast<const QBNot*>(literal.get()))) ||
+        if((literal->isNot() && !isInvVar(static_cast<const QBNot*>(literal.get()))) ||
           (!literal->isNot() && !literal->isVar()))
             return false;
     }
@@ -126,7 +122,7 @@ bool isCNF(const QBFunc &func) {
     {
         if(op->isOr() && !isCNFOrTerm(static_cast<const QBOr*>(op.get())))
             return false;
-        else if(op->isNot() && !isCNFNotTerm(static_cast<const QBNot*>(op.get())))
+        else if(op->isNot() && !isInvVar(static_cast<const QBNot*>(op.get())))
             return false;
     }
     return true;
@@ -148,7 +144,7 @@ vector<int> runPicoSat(const std::vector<int>& input, int nVars)
 
     std::unique_lock<std::mutex> lock(picoMutex); 
     vector<int> resultVec;
-    const int decisionLimit = 10000;
+    const int decisionLimit = -1;
     auto solver = picosat_init();
     if(nVars >= 0)
         picosat_adjust(solver, nVars);
@@ -158,7 +154,7 @@ vector<int> runPicoSat(const std::vector<int>& input, int nVars)
     
     auto result = picosat_sat(solver, decisionLimit);
     if(result == PICOSAT_UNKNOWN)
-        throw std::runtime_error("runPicoSat: Unknown Solution");
+        throw std::runtime_error("runPicoSat: Unknown Solution v" + std::to_string(nVars));
     else if(result == PICOSAT_SATISFIABLE)
     {
         int nPicoVars = picosat_variables(solver);
@@ -166,6 +162,7 @@ vector<int> runPicoSat(const std::vector<int>& input, int nVars)
         for(int i = 0; i < nPicoVars; ++i)
             resultVec[i] = picosat_deref(solver, i + 1) * (i + 1);
     }
+    picosat_reset(solver);
     return std::move(resultVec);
 }
 

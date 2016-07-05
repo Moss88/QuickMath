@@ -50,6 +50,10 @@ QBVector QBManager::getBitVector(const std::string& name, unsigned int size) {
     return QBVector(move(bits));
 }
 
+unsigned int QBManager::numberTempVars() const {
+    return this->tempVars.size();
+}
+
 unsigned int QBManager::numberVars() const {
     return this->vars.size();
 }

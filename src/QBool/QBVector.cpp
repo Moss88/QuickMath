@@ -25,35 +25,15 @@ QBVector::QBVector(const std::vector<QBFunc> &&bits) {
 
 QBFunc QBVector::operator<(const QBVector& other) const {
     sizeExcept(*this, other);
-
-    // Perform Algorithm
-    int i;
-    QBFunc x;
-    QBFunc func;
-    bool xSet = false;
-    for(i = this->size() - 1; i >= 0; i--)
-    {
-        // Generate term = ~AB;
-        QBFunc term = !bits[i] & other.bits[i];
-
-        // Generate X
-        QBFunc eq1 =  bits[i] & other.bits[i];
-        QBFunc eq2 =  (!bits[i]) & (!other.bits[i]);
-
-        if(xSet)
-        {
-            // Use Old X Term
-            func |= term & x;
-            x = x & (eq1 | eq2);
-        }
-        else
-        {
-            x = eq1 | eq2;
-            func = term;
-            xSet = true;
-        }
-    }
-    return move(func);
+    
+    std::function<QBFunc(int)> recurGen = [&](int idx) {
+        if(idx == 0)
+            return !this->bits[0] & other.bits[0];
+        return (!this->bits[idx] & other.bits[idx]) | 
+            (((this->bits[idx] & other.bits[idx]) | ((!this->bits[idx]) & (!other.bits[idx]))) & recurGen(idx - 1)); 
+    };
+    return recurGen(this->bits.size() - 1);
+   
 }
 
 QBFunc QBVector::operator<=(const QBVector& other) const {
